@@ -1,0 +1,7 @@
+@use "variables" as vars;
+
+.main {
+    background-color: vars.$secondary;
+    width: 70%;
+    padding: vars.$measure;
+}

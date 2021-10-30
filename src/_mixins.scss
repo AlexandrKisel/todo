@@ -1,0 +1,21 @@
+@use 'variables'as vars;
+
+@mixin rounded {
+    border-radius: vars.$measure / 3;
+}
+
+@mixin flexbox {
+    display: flex;
+}
+
+@mixin flex-direction($direction: row) {
+    flex-direction: $direction;
+}
+
+@mixin justify-content($value: flex-start) {
+    justify-content: $value;
+}
+
+@mixin align-items($value: center) {
+    align-items: $value;
+}

@@ -1,0 +1,31 @@
+@use "variables"as vars;
+@use 'mixins' as mixins;
+
+.header {
+    @include mixins.flexbox;
+    @include mixins.flex-direction;
+    @include mixins.justify-content($value: space-between);
+    @include mixins.align-items;
+    background: lighten($color: #544c81, $amount: 20);
+    padding: vars.$measure;
+    
+    & img {
+        width: 50px;
+    }
+
+    & .logo {
+        @include mixins.flexbox;
+        @include mixins.flex-direction;
+        @include mixins.align-items;
+        color: #fff;
+    }
+
+    & h1 {
+        padding: vars.$measure / 3;
+    }
+
+    & input {
+        margin: vars.$measure / 3;
+    }
+}
+

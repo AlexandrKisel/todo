@@ -1,0 +1,7 @@
+@use "variables" as vars;
+.side {
+    background: lighten(vars.$primary, 20);
+    width: 30%;
+    padding: vars.$measure;
+    color: #fff;
+}
