@@ -1,0 +1,9 @@
+@use 'variables'as vars;
+
+.categoriesPanel {
+    color: #fff;
+}
+
+.categoriesColumn{
+    padding: vars.$measure;
+}

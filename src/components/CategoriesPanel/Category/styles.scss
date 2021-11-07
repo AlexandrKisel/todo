@@ -1,0 +1,10 @@
+@use "variables" as vars;
+@use 'mixins' as mixins;
+
+.category {
+    padding: vars.$measure/1.5;
+    @include mixins.flexbox;
+    @include mixins.flex-direction;
+    @include mixins.justify-content($value: space-between);
+    @include mixins.align-items;
+}
