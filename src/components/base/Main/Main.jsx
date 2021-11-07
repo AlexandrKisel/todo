@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './styles.scss'
+import TasksPanel from '../../TasksPanel';
 
 function Main() {
   return (
     <div className={styles.main}>
-      My Friend
+      <TasksPanel />
     </div>
   );
 }

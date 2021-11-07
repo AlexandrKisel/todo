@@ -1,12 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './styles.scss';
-import logo from '../../../assets/images/logo.svg';
+import Logo from '../../common/Logo';
 
 function Header() {
   return (
     <div className={styles.header}>
       <div className={styles.logo}>
-        <img src={logo} alt="logo" />
+        <Link to="/">
+          <Logo />
+        </Link>
         <h1>TO-DO LIST</h1>
       </div>
       <div>

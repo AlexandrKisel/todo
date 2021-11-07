@@ -6,28 +6,28 @@ import { connect } from 'react-redux';
 import selectors from './selectors';
 import styles from './styles.scss';
 import actions from './actions';
-import CategoryColumn from './CategoryColumn';
+import TaskColumn from './TaskColumn';
 import Loader from '../common/Loader/Loader';
 
-function CategoriesPanel(props) {
-  const { categories, isLoading, loadCategories } = props;
+function TasksPanel(props) {
+  const { tasks, isLoading, loadTasks } = props;
   useEffect(() => {
-    loadCategories();
+    loadTasks();
   }, []);
   console.log(props);
 
-  const RenderCategoriesColumn = () => {
+  const RenderTasksColumn = () => {
     return (
-      <CategoryColumn categories={JSON.parse(categories)} />
+      <TaskColumn tasks={JSON.parse(tasks)} />
     );
   };
 
   return (
     <>
-      <div className={styles.categoriesPanel}>
+      <div className={styles.tasksPanel}>
         <section>
-          <div className={styles.categoriesColumn}>
-            <RenderCategoriesColumn />
+          <div className={styles.tasksColumn}>
+            <RenderTasksColumn />
           </div>
         </section>
         <Loader visible={isLoading} />
@@ -37,8 +37,8 @@ function CategoriesPanel(props) {
 }
 
 const mapStateToProps = (state) => ({
-  categories: selectors.getCategories(state),
+  tasks: selectors.getTasks(state),
   isLoading: selectors.getIsLoading(state),
 });
 
-export default connect(mapStateToProps, actions)(CategoriesPanel);
+export default connect(mapStateToProps, actions)(TasksPanel);

@@ -1,9 +1,10 @@
 @use "variables" as vars;
 @use 'mixins' as mixins;
 
-.category {
+.task {
     @include mixins.flexbox;
     @include mixins.flex-direction;
     @include mixins.justify-content($value: space-between);
     @include mixins.align-items;
 }
+

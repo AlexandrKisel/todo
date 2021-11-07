@@ -1,0 +1,3 @@
+const TASKS_PANEL = 'TASKS_PANEL';
+export const SET_TASKS = `${TASKS_PANEL}_SET_TASKS`;
+export const SET_IS_LOADING = `${TASKS_PANEL}_IS_LOADING`;

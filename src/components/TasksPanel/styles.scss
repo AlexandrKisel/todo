@@ -1,8 +1,7 @@
 @use 'variables'as vars;
 @use 'mixins' as mixins;
 
-
-.categoriesPanel {
+.tasksPanel {
     @include mixins.flexbox;
     @include mixins.flex-direction(column);
     color: #fff;
@@ -13,6 +12,6 @@
     overflow-y: auto;
 }
 
-.categoriesColumn{
+.tasksColumn{
     padding: vars.$measure;
 }
