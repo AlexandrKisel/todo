@@ -2,11 +2,14 @@
 @use 'mixins' as mixins;
 
 .header {
+    background: lighten($color: #544c81, $amount: 20);
+}
+
+.logoWrapper {
     @include mixins.flexbox;
     @include mixins.flex-direction;
     @include mixins.justify-content($value: space-between);
     @include mixins.align-items;
-    background: lighten($color: #544c81, $amount: 20);
     padding: vars.$measure;
  
     
@@ -31,3 +34,10 @@
     }
 }
 
+.categoryButton {
+    @include mixins.flexbox;
+    @include mixins.flex-direction;
+    @include mixins.justify-content($value: space-between);
+    @include mixins.align-items;
+    padding: vars.$measure vars.$measure*3 vars.$measure vars.$measure*2;
+}

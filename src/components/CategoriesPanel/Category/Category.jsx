@@ -7,10 +7,10 @@ import styles from './styles.scss';
 import categoriesPanelActions from '../actions';
 
 function Category(props) {
-  const { categoryId, categoryName } = props;
+  const { categoryId, categoryTitle } = props;
   return (
     <div className={styles.category}>
-      <h3>{categoryName}</h3>
+      <h3>{categoryTitle}</h3>
       <div>{categoryId}</div>
     </div>
   );
@@ -18,7 +18,7 @@ function Category(props) {
 
 Category.propTypes = {
   categoryId: PropTypes.string,
-  categoryName: PropTypes.array,
+  categoryTitle: PropTypes.array,
 };
 
 export default connect(null, categoriesPanelActions)(Category);

@@ -9,6 +9,17 @@ const getCategories = async () => {
     return data;
 }
 
+const createCategory = async (data = {}) => {
+    const response = await fetch('http://localhost:8081/addCategory', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+    return response.json();
+}
+
 const getTasks = async () => {
     const response = await fetch('http://localhost:8081/tasks', {
         method: 'GET',
@@ -37,6 +48,7 @@ const deleteTask = async () => {};
 export default {
     getCategories,
     getTasks,
+    createCategory,
     createTask,
     deleteTask
   };

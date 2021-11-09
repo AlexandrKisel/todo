@@ -15,7 +15,7 @@ function Task(props) {
     <div className={styles.task}>
       <div>{taskId}</div>
       <h3>{taskTitle}</h3>
-      <div>{taskCategory.categoryName}</div>
+      <div>{taskCategory.categoryTitle}</div>
     </div>
   );
 }
