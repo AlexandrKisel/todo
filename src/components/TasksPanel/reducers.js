@@ -1,11 +1,19 @@
 import {
     SET_TASKS,
     SET_IS_LOADING,
+    SET_NEW_TASK,
 } from './actionTypes';
 
 const initState = {
     tasks: [],
     isLoading: false,
+    newTask: {
+        taskId: '',
+        taskCategory: '',
+        taskTitle: '',
+        taskDescription: '',
+        isDone: false,
+    }
 };
 
 export const tasksPanelReducer = (state = initState, action) => {
@@ -22,6 +30,16 @@ export const tasksPanelReducer = (state = initState, action) => {
             return {
               ...state,
               isLoading,
+            };
+          }
+        case SET_NEW_TASK: {
+            const { newTaskName } = action.payload;
+            return {
+              ...state,
+              newTask: {
+                ...state.newTask,
+                title: newTaskName,
+              },
             };
           }
         default:
