@@ -10,8 +10,9 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import styles from './styles.scss';
 import Logo from '../../common/Logo';
-import actions from '../../CategoriesPanel/actions.js';
+import categoriesActions from '../../CategoriesPanel/actions.js';
 import selectors from '../../CategoriesPanel/selectors';
+import taskActions from '../../TasksPanel/actions.js';
 
 function Header(props) {
   const {
@@ -19,6 +20,10 @@ function Header(props) {
     setNewCategory,
     newCategory,
     addCategory,
+    tasks,
+    newTask,
+    addTask,
+    setNewTask,
   } = props;
   console.log(props);
 
@@ -33,7 +38,34 @@ function Header(props) {
     });
   };
 
-  const renderInput = (value, onChange) => {
+  const handleNewTaskChange = (e) => {
+    setNewTask(e.target.value, (JSON.parse(tasks).length + 1).toString());
+  };
+
+  const handleAddTaskClick = () => {
+    addTask({
+      taskId: newTask.taskId,
+      taskTitle: newTask.taskTitle,
+      taskDescription: newTask.taskDescription,
+    });
+  };
+
+  const renderCategoryInput = (value, onChange) => {
+    return (
+      <TextField
+        value={value}
+        id="new-category-title"
+
+        type="text"
+        onChange={onChange}
+        size="small"
+        variant="outlined"
+        label="Enter category title"
+      />
+    );
+  };
+
+  const renderTaskInput = (value, onChange) => {
     return (
       <TextField
         value={value}
@@ -68,13 +100,14 @@ function Header(props) {
       </div>
       <div className={styles.categoryButton}>
         <div>
-          {renderInput(newCategory.categoryTitle, handleNewCategoryChange)}
+          {renderCategoryInput(newCategory.categoryTitle, handleNewCategoryChange)}
           <Button  variant="contained" onClick={handleAddCategoryClick}>
             Add
           </Button>
         </div>
         <div>
-          <Button  variant="contained" onClick="click">
+          {renderTaskInput(newTask.taskTitle, handleNewTaskChange)}
+          <Button  variant="contained" onClick={handleAddTaskClick}>
             Add
           </Button>
         </div>
@@ -91,8 +124,9 @@ Header.propTypes = {
 
 const mapStateToProps = (state) => ({
   categories: selectors.getCategories(state),
+  tasks: selectors.getTasks(state),
   isLoading: selectors.getIsLoading(state),
-  newCategory: selectors.getNewCategory(state),
+  newTask: selectors.getNewTask(state),
 });
 
-export default connect(mapStateToProps, actions)(Header);
+export default connect(mapStateToProps, {categoriesActions, taskActions})(Header);
