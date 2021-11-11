@@ -22,8 +22,8 @@ function Task(props) {
 
 Task.propTypes = {
   taskId: PropTypes.string,
+  // taskCategory: PropTypes.object,
   taskTitle: PropTypes.string,
-  taskCategory: PropTypes.object,
   taskDescription: PropTypes.string,
 };
 

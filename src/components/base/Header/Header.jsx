@@ -10,9 +10,10 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import styles from './styles.scss';
 import Logo from '../../common/Logo';
-import categoriesActions from '../../CategoriesPanel/actions.js';
-import selectors from '../../CategoriesPanel/selectors';
-import taskActions from '../../TasksPanel/actions.js';
+import selectorsCategoriesPanel from '../../CategoriesPanel/selectors';
+import selectorsTasksPanel from '../../TasksPanel/selectors';
+import actionsCategoriesPanel from '../../CategoriesPanel/actions';
+import actionsTasksPanel from '../../TasksPanel/actions';
 
 function Header(props) {
   const {
@@ -21,9 +22,9 @@ function Header(props) {
     newCategory,
     addCategory,
     tasks,
+    setNewTask,
     newTask,
     addTask,
-    setNewTask,
   } = props;
   console.log(props);
 
@@ -39,14 +40,16 @@ function Header(props) {
   };
 
   const handleNewTaskChange = (e) => {
-    setNewTask(e.target.value, (JSON.parse(tasks).length + 1).toString());
+    setNewTask((JSON.parse(tasks).length + 1).toString(), {}, e.target.value, '', false);
   };
 
   const handleAddTaskClick = () => {
     addTask({
       taskId: newTask.taskId,
+      taskCategory: newTask.taskCategory,
       taskTitle: newTask.taskTitle,
       taskDescription: newTask.taskDescription,
+      isDone: newTask.isDone,
     });
   };
 
@@ -55,7 +58,6 @@ function Header(props) {
       <TextField
         value={value}
         id="new-category-title"
-
         type="text"
         onChange={onChange}
         size="small"
@@ -69,13 +71,12 @@ function Header(props) {
     return (
       <TextField
         value={value}
-        id="new-category-title"
-
+        id="new-task-title"
         type="text"
         onChange={onChange}
         size="small"
         variant="outlined"
-        label="Enter category title"
+        label="Text input with button"
       />
     );
   };
@@ -107,7 +108,7 @@ function Header(props) {
         </div>
         <div>
           {renderTaskInput(newTask.taskTitle, handleNewTaskChange)}
-          <Button  variant="contained" onClick={handleAddTaskClick}>
+          <Button variant="contained" onClick={handleAddTaskClick}>
             Add
           </Button>
         </div>
@@ -118,15 +119,21 @@ function Header(props) {
 
 Header.propTypes = {
   categoryId: PropTypes.string,
-  categoryTitle: PropTypes.array.isRequired,
+  categoryTitle: PropTypes.array,
+  taskId: PropTypes.string,
+  taskTitle: PropTypes.string,
+  taskDescription: PropTypes.string,
+  isDone: PropTypes.bool,
 };
 
 
 const mapStateToProps = (state) => ({
-  categories: selectors.getCategories(state),
-  tasks: selectors.getTasks(state),
-  isLoading: selectors.getIsLoading(state),
-  newTask: selectors.getNewTask(state),
+  categories: selectorsCategoriesPanel.getCategories(state),
+  newCategory: selectorsCategoriesPanel.getNewCategory(state),
+  isLoadingCategories: selectorsCategoriesPanel.getIsLoadingCategories(state),
+  tasks: selectorsTasksPanel.getTasks(state),
+  newTask: selectorsTasksPanel.getNewTask(state),
+  isLoadingTasks: selectorsTasksPanel.getIsLoadingTasks(state),
 });
 
-export default connect(mapStateToProps, {categoriesActions, taskActions})(Header);
+export default connect(mapStateToProps, { ...actionsCategoriesPanel, ...actionsTasksPanel })(Header);

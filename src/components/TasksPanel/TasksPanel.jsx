@@ -10,7 +10,7 @@ import TaskColumn from './TaskColumn';
 import Loader from '../common/Loader/Loader';
 
 function TasksPanel(props) {
-  const { tasks, isLoading, loadTasks } = props;
+  const { tasks, isLoadingTasks, loadTasks } = props;
   useEffect(() => {
     loadTasks();
   }, []);
@@ -30,7 +30,7 @@ function TasksPanel(props) {
             <RenderTasksColumn />
           </div>
         </section>
-        <Loader visible={isLoading} />
+        <Loader visible={isLoadingTasks} />
       </div>
     </>
   );
@@ -38,7 +38,7 @@ function TasksPanel(props) {
 
 const mapStateToProps = (state) => ({
   tasks: selectors.getTasks(state),
-  isLoading: selectors.getIsLoading(state),
+  isLoadingTasks: selectors.getIsLoadingTasks(state),
 });
 
 export default connect(mapStateToProps, actions)(TasksPanel);

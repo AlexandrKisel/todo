@@ -1,9 +1,9 @@
 const getCategories = (store) => JSON.stringify(store.categoriesPanelReducer.categories);
-const getIsLoading = (store) => store.categoriesPanelReducer.isLoading;
+const getIsLoadingCategories = (store) => store.categoriesPanelReducer.isLoadingCategories;
 const getNewCategory = (store) => store.categoriesPanelReducer.newCategory;
 
 export default {
     getCategories,
-    getIsLoading,
+    getIsLoadingCategories,
     getNewCategory,
 }

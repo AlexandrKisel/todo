@@ -10,7 +10,7 @@ import CategoryColumn from './CategoryColumn';
 import Loader from '../common/Loader/Loader';
 
 function CategoriesPanel(props) {
-  const { categories, isLoading, loadCategories } = props;
+  const { categories, isLoadingCategories, loadCategories } = props;
   useEffect(() => {
     loadCategories();
   }, []);
@@ -30,7 +30,7 @@ function CategoriesPanel(props) {
             <RenderCategoriesColumn />
           </div>
         </section>
-        <Loader visible={isLoading} />
+        <Loader visible={isLoadingCategories} />
       </div>
     </>
   );
@@ -38,7 +38,7 @@ function CategoriesPanel(props) {
 
 const mapStateToProps = (state) => ({
   categories: selectors.getCategories(state),
-  isLoading: selectors.getIsLoading(state),
+  isLoadingCategories: selectors.getIsLoadingCategories(state),
 });
 
 export default connect(mapStateToProps, actions)(CategoriesPanel);

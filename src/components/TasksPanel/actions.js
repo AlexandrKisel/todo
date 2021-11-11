@@ -3,7 +3,7 @@
 import dataService from '../../services/dataService';
 import {
     SET_TASKS,
-    SET_IS_LOADING,
+    SET_IS_LOADING_TASKS,
     SET_NEW_TASK,
 } from './actionTypes';
 
@@ -14,28 +14,28 @@ const setTasks = (tasks) => ({
     }
 });
 
-const setIsLoading = (isLoading) => ({
-    type: SET_IS_LOADING,
+const setIsLoadingTasks = (isLoadingTasks) => ({
+    type: SET_IS_LOADING_TASKS,
     payload: {
-        isLoading,
+        isLoadingTasks,
     }
 });
 
-const setNewTask = ( newTaskId, newTaskTitle, newTaskCategory, newTaskDescription, newTaskIsDone ) => ({
+const setNewTask = ( newTaskId, newTaskCategory, newTaskTitle, newTaskDescription, IsDoneNewTask ) => ({
     type: SET_NEW_TASK,
     payload: {
       newTaskId,
-      newTaskTitle,
       newTaskCategory,
+      newTaskTitle,
       newTaskDescription,
-      newTaskIsDone,
+      IsDoneNewTask,
     },
 });
 
 const loadTasks = () => (dispatch) => {
-    dispatch(setIsLoading(true));
+    dispatch(setIsLoadingTasks(true));
     dataService.getTasks().then((data) => {
-        dispatch(setIsLoading(false));
+        dispatch(setIsLoadingTasks(false));
         dispatch(setTasks(data));
     })
 

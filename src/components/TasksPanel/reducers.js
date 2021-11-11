@@ -1,12 +1,12 @@
 import {
     SET_TASKS,
-    SET_IS_LOADING,
+    SET_IS_LOADING_TASKS,
     SET_NEW_TASK,
 } from './actionTypes';
 
 const initState = {
     tasks: [],
-    isLoading: false,
+    isLoadingTasks: false,
     newTask: {
         taskId: '',
         taskCategory: '',
@@ -25,20 +25,30 @@ export const tasksPanelReducer = (state = initState, action) => {
                 tasks,
             };
         }
-        case SET_IS_LOADING: {
-            const { isLoading } = action.payload;
+        case SET_IS_LOADING_TASKS: {
+            const { isLoadingTasks } = action.payload;
             return {
               ...state,
-              isLoading,
+              isLoadingTasks,
             };
           }
         case SET_NEW_TASK: {
-            const { newTaskName } = action.payload;
+            const {
+              newTaskId,
+              newTaskCategory,
+              newTaskTitle,
+              newTaskDescription,
+              isDoneNewTask
+            } = action.payload;
             return {
               ...state,
               newTask: {
                 ...state.newTask,
-                title: newTaskName,
+                taskId: newTaskId,
+                taskCategory: newTaskCategory,
+                taskTitle: newTaskTitle,
+                taskDescription: newTaskDescription,
+                isDone: isDoneNewTask
               },
             };
           }

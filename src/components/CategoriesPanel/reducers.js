@@ -1,12 +1,12 @@
 import {
     SET_CATEGORIES,
-    SET_IS_LOADING,
+    SET_IS_LOADING_CATEGORIES,
     SET_NEW_CATEGORY,
 } from './actionTypes';
 
 const initState = {
     categories: [],
-    isLoading: false,
+    isLoadingCategories: false,
     newCategory: {
         categoryId: '',
         categoryTitle: '',
@@ -22,11 +22,11 @@ export const categoriesPanelReducer = (state = initState, action) => {
                 categories,
             };
         }
-        case SET_IS_LOADING: {
-            const { isLoading } = action.payload;
+        case SET_IS_LOADING_CATEGORIES: {
+            const { isLoadingCategories } = action.payload;
             return {
               ...state,
-              isLoading,
+              isLoadingCategories,
             };
           }
           case SET_NEW_CATEGORY: {
@@ -34,6 +34,7 @@ export const categoriesPanelReducer = (state = initState, action) => {
             return {
               ...state,
               newCategory: {
+                ...state.newCategory,
                 categoryTitle: newCategoryName,
                 categoryId: newCategoryId,
               },

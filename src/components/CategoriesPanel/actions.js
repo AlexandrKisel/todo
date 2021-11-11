@@ -3,7 +3,7 @@
 import dataService from '../../services/dataService';
 import {
     SET_CATEGORIES,
-    SET_IS_LOADING,
+    SET_IS_LOADING_CATEGORIES,
     SET_NEW_CATEGORY,
 } from './actionTypes';
 
@@ -14,10 +14,10 @@ const setCategories = (categories) => ({
     }
 });
 
-const setIsLoading = (isLoading) => ({
-    type: SET_IS_LOADING,
+const setIsLoadingCategories = (isLoadingCategories) => ({
+    type: SET_IS_LOADING_CATEGORIES,
     payload: {
-        isLoading,
+        isLoadingCategories,
     }
 });
 
@@ -30,9 +30,9 @@ const setNewCategory = (newCategoryName, newCategoryId) => ({
   });
 
 const loadCategories = () => (dispatch) => {
-    dispatch(setIsLoading(true));
+    dispatch(setIsLoadingCategories(true));
     dataService.getCategories().then((data) => {
-        dispatch(setIsLoading(false));
+        dispatch(setIsLoadingCategories(false));
         dispatch(setCategories(data));
     })
 };
