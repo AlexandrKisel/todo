@@ -23,9 +23,9 @@ function CategoryColumn(props) {
             <li key={item.categoryId}>
               <Link className={styles.categoryLink} to={`/${item.categoryTitle.toString().toLowerCase().replace(/\s+/g, '')}/`}>
                 <Category
-                categoryId={item.categoryId}
-                categoryTitle={item.categoryTitle}
-                />
+                  categoryId={item.categoryId}
+                  categoryTitle={item.categoryTitle}
+                  />
               </Link>
             </li>
           ))}

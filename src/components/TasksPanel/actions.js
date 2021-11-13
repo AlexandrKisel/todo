@@ -21,14 +21,14 @@ const setIsLoadingTasks = (isLoadingTasks) => ({
     }
 });
 
-const setNewTask = ( newTaskId, newTaskCategory, newTaskTitle, newTaskDescription, IsDoneNewTask ) => ({
+const setNewTask = ( newTaskId, newTaskCategory, newTaskTitle, newTaskDescription, isDoneNewTask ) => ({
     type: SET_NEW_TASK,
     payload: {
       newTaskId,
       newTaskCategory,
       newTaskTitle,
       newTaskDescription,
-      IsDoneNewTask,
+      isDoneNewTask,
     },
 });
 

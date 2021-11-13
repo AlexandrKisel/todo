@@ -76,7 +76,7 @@ function Header(props) {
         onChange={onChange}
         size="small"
         variant="outlined"
-        label="Text input with button"
+        label="Enter task Title"
       />
     );
   };
@@ -102,7 +102,7 @@ function Header(props) {
       <div className={styles.categoryButton}>
         <div>
           {renderCategoryInput(newCategory.categoryTitle, handleNewCategoryChange)}
-          <Button  variant="contained" onClick={handleAddCategoryClick}>
+          <Button variant="contained" onClick={handleAddCategoryClick}>
             Add
           </Button>
         </div>

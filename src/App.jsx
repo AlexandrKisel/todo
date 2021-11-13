@@ -12,11 +12,15 @@ class App extends React.PureComponent {
     return (
       <Provider store={store}>
         <Router>
-          <div className={`${styles.main} ${styles.container} ${styles.container_vertical}`}>
-            <Header/>
-            <div className={`${styles.container} ${styles.container_horizontal}`}>
-              <Side/>
-              <Main/>
+          <div
+            className={`${styles.main} ${styles.container} ${styles.container_vertical}`}
+          >
+            <Header />
+            <div
+              className={`${styles.container} ${styles.container_horizontal}`}
+            >
+              <Side />
+              <Main />
             </div>
           </div>
         </Router>

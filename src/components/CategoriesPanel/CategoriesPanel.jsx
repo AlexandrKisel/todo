@@ -11,15 +11,13 @@ import Loader from '../common/Loader/Loader';
 
 function CategoriesPanel(props) {
   const { categories, isLoadingCategories, loadCategories } = props;
+  console.log(props);
   useEffect(() => {
     loadCategories();
   }, []);
-  console.log(props);
 
   const RenderCategoriesColumn = () => {
-    return (
-      <CategoryColumn categories={JSON.parse(categories)} />
-    );
+    return <CategoryColumn categories={JSON.parse(categories)} />;
   };
 
   return (
