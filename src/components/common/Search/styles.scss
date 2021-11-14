@@ -1,0 +1,5 @@
+@use 'variables' as vars;
+
+.searchTask {
+    padding: vars.$measure*2 ;
+}

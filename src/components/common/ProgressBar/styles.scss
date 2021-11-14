@@ -1,0 +1,5 @@
+@use 'variables' as var;
+
+.progressBar {
+    padding: 0 var.$measure*2;
+}

@@ -5,6 +5,7 @@ import {
     SET_CATEGORIES,
     SET_IS_LOADING_CATEGORIES,
     SET_NEW_CATEGORY,
+    SET_CURRENT_CATEGORY,
 } from './actionTypes';
 
 const setCategories = (categories) => ({
@@ -24,10 +25,17 @@ const setIsLoadingCategories = (isLoadingCategories) => ({
 const setNewCategory = (newCategoryName, newCategoryId) => ({
     type: SET_NEW_CATEGORY,
     payload: {
-      newCategoryName,
-      newCategoryId,
+        newCategoryName,
+        newCategoryId,
     },
-  });
+});
+
+const setCurrentCategory = (currentCategory) => ({
+    type: SET_CURRENT_CATEGORY,
+    payload: {
+        currentCategory
+    },
+});
 
 const loadCategories = () => (dispatch) => {
     dispatch(setIsLoadingCategories(true));
@@ -39,12 +47,13 @@ const loadCategories = () => (dispatch) => {
 
 const addCategory = (newCategory) => (dispatch) => {
     dataService.createCategory(newCategory).then(() => {
-      dispatch(loadCategories());
+        dispatch(loadCategories());
     });
-  };
+};
 
 export default {
     loadCategories,
     setNewCategory,
     addCategory,
+    setCurrentCategory,
 }

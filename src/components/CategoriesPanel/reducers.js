@@ -2,6 +2,7 @@ import {
     SET_CATEGORIES,
     SET_IS_LOADING_CATEGORIES,
     SET_NEW_CATEGORY,
+    SET_CURRENT_CATEGORY,
 } from './actionTypes';
 
 const initState = {
@@ -10,7 +11,8 @@ const initState = {
     newCategory: {
         categoryId: '',
         categoryTitle: '',
-    }
+    },
+    currentCategory: null,
 };
 
 export const categoriesPanelReducer = (state = initState, action) => {
@@ -38,6 +40,13 @@ export const categoriesPanelReducer = (state = initState, action) => {
                 categoryTitle: newCategoryName,
                 categoryId: newCategoryId,
               },
+            };
+          }
+          case SET_CURRENT_CATEGORY: {
+            const result = action.payload;
+            return {
+              ...state,
+              currentCategory: result,
             };
           }
         default:

@@ -8,12 +8,17 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+import Checkbox from '@mui/material/Checkbox';
+import Box from '@mui/material/Box';
 import styles from './styles.scss';
 import Logo from '../../common/Logo';
 import selectorsCategoriesPanel from '../../CategoriesPanel/selectors';
 import selectorsTasksPanel from '../../TasksPanel/selectors';
 import actionsCategoriesPanel from '../../CategoriesPanel/actions';
 import actionsTasksPanel from '../../TasksPanel/actions';
+import Search from '../../common/Search';
+import ProgressBar from '../../common/ProgressBar';
 
 function Header(props) {
   const {
@@ -29,7 +34,10 @@ function Header(props) {
   console.log(props);
 
   const handleNewCategoryChange = (e) => {
-    setNewCategory(e.target.value, (JSON.parse(categories).length + 1).toString());
+    setNewCategory(
+      e.target.value,
+      (JSON.parse(categories).length + 1).toString(),
+    );
   };
 
   const handleAddCategoryClick = () => {
@@ -40,7 +48,13 @@ function Header(props) {
   };
 
   const handleNewTaskChange = (e) => {
-    setNewTask((JSON.parse(tasks).length + 1).toString(), {}, e.target.value, '', false);
+    setNewTask(
+      (JSON.parse(tasks).length + 1).toString(),
+      {},
+      e.target.value,
+      '',
+      false,
+    );
   };
 
   const handleAddTaskClick = () => {
@@ -81,7 +95,6 @@ function Header(props) {
     );
   };
 
-
   return (
     <div className={styles.header}>
       <div className={styles.logoWrapper}>
@@ -91,26 +104,54 @@ function Header(props) {
           </Link>
           <h1>TO-DO LIST</h1>
         </div>
-        <div>
-          <input type="checkbox" />
-          <input type="search" placeholder="Search" />
+        <div className={styles.filterPanel}>
+          <Checkbox
+            // checked={checked}
+            // onChange={handleChange}
+            inputProps={{ 'aria-label': 'controlled' }}
+          />
+          <p>Show done</p>
+          <Search />
         </div>
       </div>
       <div>
-        Progress Bar
+        <ProgressBar />
       </div>
-      <div className={styles.categoryButton}>
+      <div className={styles.addPanel}>
         <div>
-          {renderCategoryInput(newCategory.categoryTitle, handleNewCategoryChange)}
-          <Button variant="contained" onClick={handleAddCategoryClick}>
-            Add
-          </Button>
+          <Box component="form" noValidate>
+            <FormControl
+              variant="standard"
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+              }}
+            >
+              {renderCategoryInput(
+                newCategory.categoryTitle,
+                handleNewCategoryChange,
+              )}
+              <Button variant="contained" onClick={handleAddCategoryClick}>
+                Add
+              </Button>
+            </FormControl>
+          </Box>
         </div>
         <div>
-          {renderTaskInput(newTask.taskTitle, handleNewTaskChange)}
-          <Button variant="contained" onClick={handleAddTaskClick}>
-            Add
-          </Button>
+          <Box component="form" noValidate>
+            <FormControl
+              variant="standard"
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+              }}
+            >
+              {renderTaskInput(newTask.taskTitle, handleNewTaskChange)}
+              <Button variant="contained" onClick={handleAddTaskClick}>
+                Add
+              </Button>
+            </FormControl>
+          </Box>
         </div>
       </div>
     </div>
@@ -126,7 +167,6 @@ Header.propTypes = {
   isDone: PropTypes.bool,
 };
 
-
 const mapStateToProps = (state) => ({
   categories: selectorsCategoriesPanel.getCategories(state),
   newCategory: selectorsCategoriesPanel.getNewCategory(state),
@@ -136,4 +176,7 @@ const mapStateToProps = (state) => ({
   isLoadingTasks: selectorsTasksPanel.getIsLoadingTasks(state),
 });
 
-export default connect(mapStateToProps, { ...actionsCategoriesPanel, ...actionsTasksPanel })(Header);
+export default connect(mapStateToProps, {
+  ...actionsCategoriesPanel,
+  ...actionsTasksPanel,
+})(Header);
