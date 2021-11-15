@@ -2,7 +2,7 @@ import {
     SET_CATEGORIES,
     SET_IS_LOADING_CATEGORIES,
     SET_NEW_CATEGORY,
-    SET_CURRENT_CATEGORY,
+    SET_CURRENT_CATEGORY_ID,
 } from './actionTypes';
 
 const initState = {
@@ -12,7 +12,7 @@ const initState = {
         categoryId: '',
         categoryTitle: '',
     },
-    currentCategory: null,
+    currentCategoryId: null,
 };
 
 export const categoriesPanelReducer = (state = initState, action) => {
@@ -42,11 +42,11 @@ export const categoriesPanelReducer = (state = initState, action) => {
               },
             };
           }
-          case SET_CURRENT_CATEGORY: {
-            const { currentCategoryId } = action.payload;
+          case SET_CURRENT_CATEGORY_ID: {
+            const { curCategoryId } = action.payload;
             return {
               ...state,
-              currentCategory: currentCategoryId,
+              currentCategoryId: curCategoryId,
             };
           }
         default:

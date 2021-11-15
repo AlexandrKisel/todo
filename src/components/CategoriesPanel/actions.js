@@ -5,7 +5,7 @@ import {
     SET_CATEGORIES,
     SET_IS_LOADING_CATEGORIES,
     SET_NEW_CATEGORY,
-    SET_CURRENT_CATEGORY,
+    SET_CURRENT_CATEGORY_ID,
 } from './actionTypes';
 
 const setCategories = (categories) => ({
@@ -30,10 +30,10 @@ const setNewCategory = (newCategoryName, newCategoryId) => ({
     },
 });
 
-const setCurrentCategory = (currentCategoryId) => ({
-    type: SET_CURRENT_CATEGORY,
+const setCurrentCategoryId = (curCategoryId) => ({
+    type: SET_CURRENT_CATEGORY_ID,
     payload: {
-        currentCategoryId
+        curCategoryId
     },
 });
 
@@ -55,5 +55,5 @@ export default {
     loadCategories,
     setNewCategory,
     addCategory,
-    setCurrentCategory,
+    setCurrentCategoryId,
 }

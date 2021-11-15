@@ -10,11 +10,11 @@ import styles from './styles.scss';
 import Category from '../Category';
 
 function CategoryColumn(props) {
-  const { categories, setCurrentCategory, currentCategory } = props;
+  const { categories, setCurrentCategoryId, currentCategoryId } = props;
 
-  const handleCurrentCategoryChange = (categoryId) => {
-    setCurrentCategory(categoryId);
-    console.log(currentCategory);
+  const handleCurrentCategoryIdChange = (curCategoryId) => {
+    setCurrentCategoryId(curCategoryId);
+    console.log(currentCategoryId);
   };
 
   console.log(props);
@@ -22,7 +22,7 @@ function CategoryColumn(props) {
     <div className={styles.category}>
       <h3
         className={styles.categoriesColumnTitle}
-        onClick={() => {handleCurrentCategoryChange(null)}}
+        onClick={() => {handleCurrentCategoryIdChange(null)}}
       >
         CATEGORIES
       </h3>
@@ -33,14 +33,14 @@ function CategoryColumn(props) {
               <React.Fragment key={item.categoryId}>
                 <div
                   className={
-                    currentCategory === item.categoryId
+                    currentCategoryId === item.categoryId
                       ? styles.selectedCategoryList
                       : undefined
                   }
                 >
                   <li
                     onClick={() => {
-                      handleCurrentCategoryChange(item.categoryId);
+                      handleCurrentCategoryIdChange(item.categoryId);
                     }}
                     className={styles.categoryList}
                   >
@@ -63,7 +63,7 @@ function CategoryColumn(props) {
 
 CategoryColumn.propTypes = {
   categories: PropTypes.array,
-  currentCategory: PropTypes.string,
+  currentCategoryId: PropTypes.string,
 };
 
 export default CategoryColumn;

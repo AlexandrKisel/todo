@@ -9,16 +9,18 @@ import Task from '../Task';
 function TaskColumn(props) {
   const {
     tasks,
-    currentCategory,
+    currentCategoryId,
    } = props;
 
-  console.log(currentCategory);
+  console.log(currentCategoryId);
   return (
     <div className={styles.task}>
       <h3 className={styles.tasksColumnTitle}>TASKS</h3>
       <section className={styles.tasks}>
         <ul>
-          {tasks.map((item) => {
+          { currentCategoryId
+          ? tasks.filter((item) => item.taskCategory.categoryId === currentCategoryId)
+          .map((item) => {
             return (
               <li key={item.taskId} className={styles.taskList}>
                 <Task
@@ -28,7 +30,19 @@ function TaskColumn(props) {
                 />
               </li>
             );
-          })}
+          })
+          :  tasks.map((item) => {
+            return (
+              <li key={item.taskId} className={styles.taskList}>
+                <Task
+                  taskId={item.taskId}
+                  taskTitle={item.taskTitle}
+                  taskCategory={item.taskCategory}
+                />
+              </li>
+            );
+          })
+          }
         </ul>
       </section>
     </div>

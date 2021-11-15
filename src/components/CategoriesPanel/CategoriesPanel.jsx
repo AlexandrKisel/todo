@@ -14,8 +14,8 @@ function CategoriesPanel(props) {
     categories,
     isLoadingCategories,
     loadCategories,
-    setCurrentCategory,
-    currentCategory,
+    setCurrentCategoryId,
+    currentCategoryId,
   } = props;
   console.log(props);
   useEffect(() => {
@@ -26,8 +26,8 @@ function CategoriesPanel(props) {
     return (
       <CategoryColumn
         categories={JSON.parse(categories)}
-        setCurrentCategory={setCurrentCategory}
-        currentCategory={currentCategory}
+        setCurrentCategoryId={setCurrentCategoryId}
+        currentCategoryId={currentCategoryId}
       />
     );
   };
@@ -49,7 +49,7 @@ function CategoriesPanel(props) {
 const mapStateToProps = (state) => ({
   categories: selectors.getCategories(state),
   isLoadingCategories: selectors.getIsLoadingCategories(state),
-  currentCategory: selectors.getCurrentCategoryId(state),
+  currentCategoryId: selectors.getCurrentCategoryId(state),
 });
 
 export default connect(mapStateToProps, { ...actions })(CategoriesPanel);
