@@ -26,6 +26,10 @@ const categories = [
     categoryId: '5',
     categoryTitle: ['To Go'],
   },
+  {
+    categoryId: '6',
+    categoryTitle: ['To Learn'],
+  },
 ];
 
 const tasks = [{
@@ -171,6 +175,24 @@ const tasks = [{
   taskCategory: categories[4],
   taskTitle: 'Jogging',
   taskDescription: 'lorem ipsum',
+  isDone: false,
+}, {
+  taskId: '25',
+  taskCategory: categories[5],
+  taskTitle: 'JavaScript',
+  taskDescription: 'pep',
+  isDone: false,
+},  {
+  taskId: '26',
+  taskCategory: categories[5],
+  taskTitle: 'CSS',
+  taskDescription: 'pop',
+  isDone: false,
+},   {
+  taskId: '27',
+  taskCategory: categories[5],
+  taskTitle: 'REACT',
+  taskDescription: 'pip',
   isDone: false,
 }
 ]

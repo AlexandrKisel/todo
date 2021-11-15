@@ -26,12 +26,13 @@ function Header(props) {
     setNewCategory,
     newCategory,
     addCategory,
+    currentCategoryId,
     tasks,
     setNewTask,
     newTask,
     addTask,
   } = props;
-  // console.log(props);
+  console.log(props);
 
   const handleNewCategoryChange = (e) => {
     setNewCategory(
@@ -50,7 +51,7 @@ function Header(props) {
   const handleNewTaskChange = (e) => {
     setNewTask(
       (JSON.parse(tasks).length + 1).toString(),
-      {},
+      JSON.parse(categories)[currentCategoryId - 1],
       e.target.value,
       '',
       false,
@@ -159,18 +160,22 @@ function Header(props) {
 }
 
 Header.propTypes = {
+  categories: PropTypes.array,
   categoryId: PropTypes.string,
   categoryTitle: PropTypes.array,
+  tasks: PropTypes.array,
   taskId: PropTypes.string,
   taskTitle: PropTypes.string,
   taskDescription: PropTypes.string,
   isDone: PropTypes.bool,
+  currentCategoryId: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   categories: selectorsCategoriesPanel.getCategories(state),
   newCategory: selectorsCategoriesPanel.getNewCategory(state),
   isLoadingCategories: selectorsCategoriesPanel.getIsLoadingCategories(state),
+  currentCategoryId: selectorsCategoriesPanel.getCurrentCategoryId(state),
   tasks: selectorsTasksPanel.getTasks(state),
   newTask: selectorsTasksPanel.getNewTask(state),
   isLoadingTasks: selectorsTasksPanel.getIsLoadingTasks(state),
