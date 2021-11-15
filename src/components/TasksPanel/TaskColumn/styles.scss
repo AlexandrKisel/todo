@@ -16,6 +16,10 @@
         position: relative;
         z-index: 0;
         overflow: hidden;
+        padding: vars.$measure;
+        box-shadow: inset vars.$shadow;
+        display: block;
+        cursor: pointer;
 
         &::after {
             content: '';
@@ -34,18 +38,6 @@
         &:hover::after {
             box-shadow: 0 0 10px 0 darken(vars.$secondary, 10) inset, 0 0 10px 4px darken(vars.$secondary, 10);
         }
-
-        & a {
-            padding: vars.$measure;
-            box-shadow: inset vars.$shadow;
-            display: block;
-        }
     }
 
-}
-
-.taskLink {
-    color: #fff;
-    list-style: none;
-    text-decoration: none;
 }

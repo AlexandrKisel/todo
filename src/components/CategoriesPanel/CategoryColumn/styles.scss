@@ -2,6 +2,7 @@
 
 .categoriesColumnTitle {
     padding-bottom: vars.$measure;
+    cursor: pointer;
 }
 
 .categories {
@@ -17,6 +18,10 @@
         background: lighten(vars.$primary, 10);
         z-index: 0;
         overflow: hidden;
+        padding: vars.$measure;
+        box-shadow: inset vars.$shadow;
+        display: block;
+        cursor: pointer;
 
         &::after {
             content: '';
@@ -34,18 +39,10 @@
         &:hover::after {
             transform: translateX(0);
         }
-
-        & a {
-            padding: vars.$measure;
-            box-shadow: inset vars.$shadow;
-            display: block;
-        }
     }
-
 }
 
-.categoryLink {
-    color: #fff;
-    list-style: none;
-    text-decoration: none;
+.selectedCategoryList .categoryList {
+    background: lighten(vars.$primary, 0);
+    box-shadow: none;
 }

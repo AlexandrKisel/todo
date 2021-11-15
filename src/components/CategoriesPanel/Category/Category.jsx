@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/prop-types */
 import React from 'react';
@@ -8,10 +9,11 @@ import categoriesPanelActions from '../actions';
 
 function Category(props) {
   const { categoryId, categoryTitle } = props;
+  console.log(categoryId)
   return (
     <div className={styles.category}>
       <h3>{categoryTitle}</h3>
-      <div>{categoryId}</div>
+      {/* <div>{categoryId}</div> */}
     </div>
   );
 }

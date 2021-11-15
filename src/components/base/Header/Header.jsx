@@ -31,7 +31,7 @@ function Header(props) {
     newTask,
     addTask,
   } = props;
-  console.log(props);
+  // console.log(props);
 
   const handleNewCategoryChange = (e) => {
     setNewCategory(

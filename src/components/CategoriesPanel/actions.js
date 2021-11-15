@@ -30,10 +30,10 @@ const setNewCategory = (newCategoryName, newCategoryId) => ({
     },
 });
 
-const setCurrentCategory = (currentCategory) => ({
+const setCurrentCategory = (currentCategoryId) => ({
     type: SET_CURRENT_CATEGORY,
     payload: {
-        currentCategory
+        currentCategoryId
     },
 });
 

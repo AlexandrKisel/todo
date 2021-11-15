@@ -43,10 +43,10 @@ export const categoriesPanelReducer = (state = initState, action) => {
             };
           }
           case SET_CURRENT_CATEGORY: {
-            const result = action.payload;
+            const { currentCategoryId } = action.payload;
             return {
               ...state,
-              currentCategory: result,
+              currentCategory: currentCategoryId,
             };
           }
         default:

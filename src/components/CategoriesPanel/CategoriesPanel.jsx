@@ -10,14 +10,26 @@ import CategoryColumn from './CategoryColumn';
 import Loader from '../common/Loader/Loader';
 
 function CategoriesPanel(props) {
-  const { categories, isLoadingCategories, loadCategories } = props;
+  const {
+    categories,
+    isLoadingCategories,
+    loadCategories,
+    setCurrentCategory,
+    currentCategory,
+  } = props;
   console.log(props);
   useEffect(() => {
     loadCategories();
   }, []);
 
   const RenderCategoriesColumn = () => {
-    return <CategoryColumn categories={JSON.parse(categories)} />;
+    return (
+      <CategoryColumn
+        categories={JSON.parse(categories)}
+        setCurrentCategory={setCurrentCategory}
+        currentCategory={currentCategory}
+      />
+    );
   };
 
   return (
@@ -37,6 +49,7 @@ function CategoriesPanel(props) {
 const mapStateToProps = (state) => ({
   categories: selectors.getCategories(state),
   isLoadingCategories: selectors.getIsLoadingCategories(state),
+  currentCategory: selectors.getCurrentCategoryId(state),
 });
 
-export default connect(mapStateToProps, actions)(CategoriesPanel);
+export default connect(mapStateToProps, { ...actions })(CategoriesPanel);

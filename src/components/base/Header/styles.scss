@@ -10,7 +10,7 @@
     @include mixins.flex-direction;
     @include mixins.justify-content($value: space-between);
     @include mixins.align-items;
-    padding: vars.$measure;
+    padding: 0 vars.$measure*1.5;
     
     & img {
         width: 50px;
