@@ -208,27 +208,27 @@ app.get('/', (req, res) => {
 app.get('/tasks', (req, res) => {
   setTimeout(() => {
     res.json(tasks)
-  }, 1000)
+  }, 500)
 })
 
 app.get('/categories', (req, res) => {
   setTimeout(() => {
     res.json(categories);
-  }, 1000)
+  }, 500)
 })
 
 app.post('/addTask', (req, res) => {
   tasks.push(req.body)
   setTimeout(() => {
     res.json(tasks)
-  }, 1000)
+  }, 500)
 })
 
 app.post('/addCategory', (req, res) => {
   categories.push(req.body)
   setTimeout(() => {
     res.json(tasks)
-  }, 1000)
+  }, 500)
 })
 
 app.post('/editCategory', (req, res) => {
@@ -240,6 +240,21 @@ app.post('/editCategory', (req, res) => {
   for (let i = 0; i < tasks.length; i += 1) {
     if (tasks[i].taskCategory.categoryId === req.body.categoryId) tasks[i].taskCategory.categoryTitle = req.body.categoryTitle;
   }
+  setTimeout(() => {
+    res.json(categories)
+  }, 500)
+})
+
+app.post('/deleteCategory', (req, res) => {
+  categories.splice(
+    categories.findIndex((item) => item.categoryId === req.body.categoryId),
+    1
+  );
+  for (let i = 0; i < tasks.length; i += 1) {
+    if (tasks[i].taskCategory.categoryId === req.body.categoryId) {
+      tasks.splice(i, 1);
+      i-=1;
+  }};
   setTimeout(() => {
     res.json(categories)
   }, 500)

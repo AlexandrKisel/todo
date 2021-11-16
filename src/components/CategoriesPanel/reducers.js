@@ -18,7 +18,7 @@ const initState = {
 export const categoriesPanelReducer = (state = initState, action) => {
     switch (action.type) {
         case SET_CATEGORIES: {
-            const { categories} = action.payload;
+            const { categories } = action.payload;
             return {
                 ...state,
                 categories,

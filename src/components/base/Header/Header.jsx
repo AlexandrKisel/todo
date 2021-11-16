@@ -5,7 +5,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
@@ -46,12 +45,19 @@ function Header(props) {
       categoryId: newCategory.categoryId,
       categoryTitle: newCategory.categoryTitle,
     });
+    setNewCategory('', '');
   };
 
   const handleNewTaskChange = (e) => {
     setNewTask(
-      (JSON.parse(tasks).length + 1).toString(),
-      JSON.parse(categories)[currentCategoryId - 1],
+      (
+        Number(JSON.parse(tasks)[JSON.parse(tasks).length - 1].taskId) + 1
+      ).toString(),
+      JSON.parse(categories)[
+        JSON.parse(categories).findIndex(
+          (item) => item.categoryId === currentCategoryId,
+        )
+      ],
       e.target.value,
       '',
       false,
@@ -66,6 +72,7 @@ function Header(props) {
       taskDescription: newTask.taskDescription,
       isDone: newTask.isDone,
     });
+    setNewTask('', '', '', '', false);
   };
 
   const renderCategoryInput = (value, onChange) => {
@@ -158,18 +165,6 @@ function Header(props) {
     </div>
   );
 }
-
-Header.propTypes = {
-  categories: PropTypes.array,
-  categoryId: PropTypes.string,
-  categoryTitle: PropTypes.array,
-  tasks: PropTypes.array,
-  taskId: PropTypes.string,
-  taskTitle: PropTypes.string,
-  taskDescription: PropTypes.string,
-  isDone: PropTypes.bool,
-  currentCategoryId: PropTypes.string,
-};
 
 const mapStateToProps = (state) => ({
   categories: selectorsCategoriesPanel.getCategories(state),

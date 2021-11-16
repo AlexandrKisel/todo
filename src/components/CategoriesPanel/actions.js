@@ -57,10 +57,17 @@ const editCategory = (newCategory) => (dispatch) => {
     });
 }
 
+const deleteCategory = (currentCategory) => (dispatch) => {
+    dataService.deleteCategory(currentCategory).then(() => {
+        dispatch(loadCategories());
+    });
+}
+
 export default {
     loadCategories,
     setNewCategory,
     addCategory,
     setCurrentCategoryId,
     editCategory,
+    deleteCategory,
 }

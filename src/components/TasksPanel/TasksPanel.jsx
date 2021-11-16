@@ -4,7 +4,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import selectorsTasksPanel from './selectors';
-import selectorsCategoriesPanel from '../CategoriesPanel/selectors';
 import styles from './styles.scss';
 import actions from './actions';
 import TaskColumn from './TaskColumn';
@@ -12,23 +11,15 @@ import Loader from '../common/Loader/Loader';
 
 function TasksPanel(props) {
   const {
-    tasks,
     isLoadingTasks,
     loadTasks,
-    currentCategoryId,
   } = props;
   useEffect(() => {
     loadTasks();
   }, []);
-  console.log(currentCategoryId);
 
   const RenderTasksColumn = () => {
-    return (
-      <TaskColumn
-      tasks={JSON.parse(tasks)}
-      currentCategoryId={currentCategoryId}
-      />
-    );
+    return <TaskColumn />;
   };
 
   return (
@@ -46,9 +37,7 @@ function TasksPanel(props) {
 }
 
 const mapStateToProps = (state) => ({
-  tasks: selectorsTasksPanel.getTasks(state),
   isLoadingTasks: selectorsTasksPanel.getIsLoadingTasks(state),
-  currentCategoryId: selectorsCategoriesPanel.getCurrentCategoryId(state),
 });
 
-export default connect(mapStateToProps, { ...actions})(TasksPanel);
+export default connect(mapStateToProps, { ...actions })(TasksPanel);
