@@ -51,9 +51,16 @@ const addCategory = (newCategory) => (dispatch) => {
     });
 };
 
+const editCategory = (newCategory) => (dispatch) => {
+    dataService.editCategory(newCategory).then(() => {
+        dispatch(loadCategories());
+    });
+}
+
 export default {
     loadCategories,
     setNewCategory,
     addCategory,
     setCurrentCategoryId,
+    editCategory,
 }

@@ -5,8 +5,7 @@ const cors = require('cors');
 const app = express();
 const port = 8081;
 
-const categories = [
-  {
+const categories = [{
     categoryId: '1',
     categoryTitle: ['To Read'],
   },
@@ -182,20 +181,19 @@ const tasks = [{
   taskTitle: 'JavaScript',
   taskDescription: 'pep',
   isDone: false,
-},  {
+}, {
   taskId: '26',
   taskCategory: categories[5],
   taskTitle: 'CSS',
   taskDescription: 'pop',
   isDone: false,
-},   {
+}, {
   taskId: '27',
   taskCategory: categories[5],
   taskTitle: 'REACT',
   taskDescription: 'pip',
   isDone: false,
-}
-]
+}]
 
 app.use(cors());
 app.use(express.json()) // for parsing application/json
@@ -231,6 +229,20 @@ app.post('/addCategory', (req, res) => {
   setTimeout(() => {
     res.json(tasks)
   }, 1000)
+})
+
+app.post('/editCategory', (req, res) => {
+  categories.splice(
+    categories.findIndex((item) => item.categoryId === req.body.categoryId),
+    1,
+    req.body,
+  );
+  for (let i = 0; i < tasks.length; i += 1) {
+    if (tasks[i].taskCategory.categoryId === req.body.categoryId) tasks[i].taskCategory.categoryTitle = req.body.categoryTitle;
+  }
+  setTimeout(() => {
+    res.json(categories)
+  }, 500)
 })
 
 app.listen(port, () => {

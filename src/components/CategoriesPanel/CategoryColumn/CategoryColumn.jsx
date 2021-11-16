@@ -6,6 +6,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import styles from './styles.scss';
 import Category from '../Category';
 
@@ -19,10 +20,12 @@ function CategoryColumn(props) {
 
   console.log(props);
   return (
-    <div className={styles.category}>
+    <div>
       <h3
         className={styles.categoriesColumnTitle}
-        onClick={() => {handleCurrentCategoryIdChange(null)}}
+        onClick={() => {
+          handleCurrentCategoryIdChange(null);
+        }}
       >
         CATEGORIES
       </h3>
@@ -50,6 +53,7 @@ function CategoryColumn(props) {
                         categoryTitle={item.categoryTitle}
                       />
                     </div>
+
                   </li>
                 </div>
               </React.Fragment>

@@ -1,4 +1,4 @@
-@use "variables" as vars;
+@use 'variables' as vars;
 @use 'mixins' as mixins;
 
 .category {
@@ -6,4 +6,9 @@
     @include mixins.flex-direction;
     @include mixins.justify-content($value: space-between);
     @include mixins.align-items;
+}
+
+.category input {
+    font-size: 18px;
+    font-weight: bold;
 }
