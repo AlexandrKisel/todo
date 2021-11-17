@@ -17,7 +17,7 @@ function CategoriesPanel(props) {
     setCurrentCategoryId,
     currentCategoryId,
   } = props;
-  console.log(props);
+  // console.log(props);
   useEffect(() => {
     loadCategories();
   }, []);

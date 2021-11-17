@@ -14,13 +14,15 @@ import tasksPanelActions from '../../TasksPanel/actions';
 function Category(props) {
   const { categoryId, categoryTitle, editCategory, loadTasks, deleteCategory } =
     props;
-  console.log(categoryId);
+  // console.log(categoryId);
   const [editMode, setEditMode] = useState(false);
   const [editCategoryName, setCategoryName] = useState(categoryTitle);
   const [editCategoryId] = useState(categoryId);
 
   const activateEditMode = () => {
+    console.log(editMode);
     setEditMode(!editMode);
+    console.log(editMode);
   };
 
   const deactivateEditMode = () => {
@@ -43,7 +45,6 @@ function Category(props) {
   };
 
   const handleDeleteCategoryClick = () => {
-    console.log({ categoryId, categoryTitle });
     deleteCategory({ categoryId, categoryTitle });
     loadTasks();
   };

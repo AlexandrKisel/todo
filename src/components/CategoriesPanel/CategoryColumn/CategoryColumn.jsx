@@ -18,7 +18,7 @@ function CategoryColumn(props) {
     console.log(currentCategoryId);
   };
 
-  console.log(props);
+  // console.log(props);
   return (
     <div>
       <h3

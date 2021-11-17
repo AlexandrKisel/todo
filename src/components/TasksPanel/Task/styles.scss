@@ -8,3 +8,13 @@
     @include mixins.align-items;
 }
 
+.taskTitle {
+    @include mixins.flexbox;
+    @include mixins.flex-direction;
+    @include mixins.align-items;
+}
+
+.taskTitle h3 {
+    padding-left: vars.$measure;
+}
+

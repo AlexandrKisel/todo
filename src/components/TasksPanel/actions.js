@@ -21,14 +21,14 @@ const setIsLoadingTasks = (isLoadingTasks) => ({
     }
 });
 
-const setNewTask = ( newTaskId, newTaskCategory, newTaskTitle, newTaskDescription, isDoneNewTask ) => ({
+const setNewTask = (newTaskId, newTaskCategory, newTaskTitle, newTaskDescription, isDoneNewTask) => ({
     type: SET_NEW_TASK,
     payload: {
-      newTaskId,
-      newTaskCategory,
-      newTaskTitle,
-      newTaskDescription,
-      isDoneNewTask,
+        newTaskId,
+        newTaskCategory,
+        newTaskTitle,
+        newTaskDescription,
+        isDoneNewTask,
     },
 });
 
@@ -43,12 +43,20 @@ const loadTasks = () => (dispatch) => {
 
 const addTask = (newTask) => (dispatch) => {
     dataService.createTask(newTask).then(() => {
-      dispatch(loadTasks());
+        dispatch(loadTasks());
     });
-  };
+};
+
+const changeTaskStatus = (currentTask) => (dispatch) => {
+    console.log(currentTask);
+    dataService.editTaskStatus(currentTask).then(() => {
+        dispatch(loadTasks());
+    });
+}
 
 export default {
     loadTasks,
     setNewTask,
     addTask,
+    changeTaskStatus,
 }

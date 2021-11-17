@@ -9,8 +9,7 @@ import selectorsTasksPanel from '../selectors';
 import Task from '../Task';
 
 function TaskColumn(props) {
-  const { tasks, currentCategoryId } = props;
- 
+  const { tasks, currentCategoryId, newTask } = props;
   return (
     <div className={styles.task}>
       <h3 className={styles.tasksColumnTitle}>TASKS</h3>
@@ -25,9 +24,11 @@ function TaskColumn(props) {
                   return (
                     <li key={item.taskId} className={styles.taskList}>
                       <Task
+                        newTask={newTask}
                         taskId={item.taskId}
                         taskTitle={item.taskTitle}
                         taskCategory={item.taskCategory}
+                        isDone={item.isDone}
                       />
                     </li>
                   );
@@ -36,9 +37,11 @@ function TaskColumn(props) {
                 return (
                   <li key={item.taskId} className={styles.taskList}>
                     <Task
+                      newTask={newTask}
                       taskId={item.taskId}
                       taskTitle={item.taskTitle}
                       taskCategory={item.taskCategory}
+                      isDone={item.isDone}
                     />
                   </li>
                 );
@@ -51,6 +54,7 @@ function TaskColumn(props) {
 
 const mapStateToProps = (state) => ({
   tasks: selectorsTasksPanel.getTasks(state),
+  newTask: selectorsTasksPanel.getNewTask(state),
   currentCategoryId: selectorsCategoriesPanel.getCurrentCategoryId(state),
 });
 

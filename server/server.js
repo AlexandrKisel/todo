@@ -42,7 +42,7 @@ const tasks = [{
   taskCategory: categories[0],
   taskTitle: 'Eleanor Coerr: Mieko and the Fifth Treasure',
   taskDescription: 'lorem ipsum',
-  isDone: false,
+  isDone: true,
 }, {
   taskId: '3',
   taskCategory: categories[0],
@@ -124,7 +124,7 @@ const tasks = [{
 }, {
   taskId: '16',
   taskCategory: categories[2],
-  taskTitle: 'Buy meat',
+  taskTitle: 'Buy cupcake',
   taskDescription: 'lorem ipsum',
   isDone: false,
 }, {
@@ -208,27 +208,27 @@ app.get('/', (req, res) => {
 app.get('/tasks', (req, res) => {
   setTimeout(() => {
     res.json(tasks)
-  }, 500)
+  }, 200)
 })
 
 app.get('/categories', (req, res) => {
   setTimeout(() => {
     res.json(categories);
-  }, 500)
+  }, 200)
 })
 
 app.post('/addTask', (req, res) => {
   tasks.push(req.body)
   setTimeout(() => {
     res.json(tasks)
-  }, 500)
+  }, 200)
 })
 
 app.post('/addCategory', (req, res) => {
   categories.push(req.body)
   setTimeout(() => {
     res.json(tasks)
-  }, 500)
+  }, 200)
 })
 
 app.post('/editCategory', (req, res) => {
@@ -242,7 +242,7 @@ app.post('/editCategory', (req, res) => {
   }
   setTimeout(() => {
     res.json(categories)
-  }, 500)
+  }, 200)
 })
 
 app.post('/deleteCategory', (req, res) => {
@@ -253,11 +253,19 @@ app.post('/deleteCategory', (req, res) => {
   for (let i = 0; i < tasks.length; i += 1) {
     if (tasks[i].taskCategory.categoryId === req.body.categoryId) {
       tasks.splice(i, 1);
-      i-=1;
-  }};
+      i -= 1;
+    }
+  };
   setTimeout(() => {
     res.json(categories)
-  }, 500)
+  }, 200)
+})
+
+app.post('/editTaskStatus', (req, res) => {
+tasks[tasks.findIndex((item) => item.taskId === req.body.taskId)].isDone = !tasks[tasks.findIndex((item) => item.taskId === req.body.taskId)].isDone;
+  setTimeout(() => {
+    res.json(tasks)
+  }, 200)
 })
 
 app.listen(port, () => {

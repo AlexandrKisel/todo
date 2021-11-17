@@ -31,7 +31,6 @@ function Header(props) {
     newTask,
     addTask,
   } = props;
-  console.log(props);
 
   const handleNewCategoryChange = (e) => {
     setNewCategory(
@@ -98,7 +97,7 @@ function Header(props) {
         onChange={onChange}
         size="small"
         variant="outlined"
-        label="Enter task Title"
+        label="Enter task title"
       />
     );
   };
@@ -139,7 +138,11 @@ function Header(props) {
                 newCategory.categoryTitle,
                 handleNewCategoryChange,
               )}
-              <Button variant="contained" onClick={handleAddCategoryClick}>
+              <Button
+                variant="contained"
+                onClick={handleAddCategoryClick}
+                disabled={!newCategory.categoryTitle}
+              >
                 Add
               </Button>
             </FormControl>
@@ -155,7 +158,11 @@ function Header(props) {
               }}
             >
               {renderTaskInput(newTask.taskTitle, handleNewTaskChange)}
-              <Button variant="contained" onClick={handleAddTaskClick}>
+              <Button
+                variant="contained"
+                onClick={handleAddTaskClick}
+                disabled={!newTask.taskTitle}
+              >
                 Add
               </Button>
             </FormControl>

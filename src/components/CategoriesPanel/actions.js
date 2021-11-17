@@ -51,8 +51,8 @@ const addCategory = (newCategory) => (dispatch) => {
     });
 };
 
-const editCategory = (newCategory) => (dispatch) => {
-    dataService.editCategory(newCategory).then(() => {
+const editCategory = (currentCategory) => (dispatch) => {
+    dataService.editCategory(currentCategory).then(() => {
         dispatch(loadCategories());
     });
 }

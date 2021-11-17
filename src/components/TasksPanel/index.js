@@ -1,5 +1,5 @@
-import tasksPanel from './tasksPanel';
+import TasksPanel from './TasksPanel';
 import { tasksPanelReducer } from './reducers';
 
 export { tasksPanelReducer };
-export default tasksPanel;
+export default TasksPanel;

@@ -64,6 +64,17 @@ const createTask = async (data = {}) => {
     return response.json();
 }
 
+const editTaskStatus = async (data = {}) => {
+    const response = await fetch('http://localhost:8081/editTaskStatus', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+    return response.json();
+}
+
 const deleteTask = async () => {};
 
 
@@ -75,4 +86,5 @@ export default {
     editCategory,
     deleteCategory,
     deleteTask,
+    editTaskStatus,
   };
