@@ -42,7 +42,7 @@ const tasks = [{
   taskCategory: categories[0],
   taskTitle: 'Eleanor Coerr: Mieko and the Fifth Treasure',
   taskDescription: 'lorem ipsum',
-  isDone: true,
+  isDone: false,
 }, {
   taskId: '3',
   taskCategory: categories[0],

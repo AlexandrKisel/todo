@@ -1,13 +1,18 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable no-console */
 import React from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
+import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
-// import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import styles from './styles.scss';
 
-function ProgressBar() {
-    // const { all, done } = props;
-    const value = 5 / 10 * 100;
+function ProgressBar(props) {
+    const { tasks } = props;
+    console.log(Number(tasks.length));
+    console.log(tasks.filter((item) => item.isDone === true).length);
+
+    const value = tasks.filter((item) => item.isDone === true).length / Number(tasks.length) * 100;
   return (
       
     <div className={styles.progressBar} >
@@ -25,10 +30,8 @@ function ProgressBar() {
   );
 }
 
-// ProgressBar.propTypes = {
-//     all: PropTypes.number,
-//     done: PropTypes.number,
-
-// }
+ProgressBar.propTypes = {
+    tasks: PropTypes.array,
+   }
 
 export default ProgressBar;

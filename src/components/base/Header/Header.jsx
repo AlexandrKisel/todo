@@ -122,7 +122,7 @@ function Header(props) {
         </div>
       </div>
       <div>
-        <ProgressBar />
+        <ProgressBar tasks={JSON.parse(tasks)}/>
       </div>
       <div className={styles.addPanel}>
         <div>
