@@ -1,10 +1,9 @@
-/* eslint-disable no-debugger */
-/* eslint-disable no-console */
 import dataService from '../../services/dataService';
 import {
     SET_TASKS,
     SET_IS_LOADING_TASKS,
     SET_NEW_TASK,
+    SET_FILTER_INPUT,
 } from './actionTypes';
 
 const setTasks = (tasks) => ({
@@ -32,6 +31,11 @@ const setNewTask = (newTaskId, newTaskCategory, newTaskTitle, newTaskDescription
     },
 });
 
+const setFilterInput = (value) => ({
+    type: SET_FILTER_INPUT,
+    payload: value,
+})
+
 const loadTasks = () => (dispatch) => {
     dispatch(setIsLoadingTasks(true));
     dataService.getTasks().then((data) => {
@@ -54,9 +58,14 @@ const changeTaskStatus = (currentTask) => (dispatch) => {
     });
 }
 
+const setFilterText = (value) => (dispatch) => {
+    dispatch(setFilterInput(value));
+}
+
 export default {
     loadTasks,
     setNewTask,
     addTask,
     changeTaskStatus,
+    setFilterText,
 }

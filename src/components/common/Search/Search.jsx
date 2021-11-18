@@ -1,14 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import TextField from '@mui/material/TextField'
 import Paper from '@mui/material/Paper';
+import PropTypes from 'prop-types';
 import InputBase from '@mui/material/InputBase';
-import IconButton from '@mui/material/IconButton';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './styles.scss';
-import actions from '../../TasksPanel/actions'
+import actions from '../../TasksPanel/actions';
+import selectors from '../../TasksPanel/selectors';
 
-function Search() {
+function Search(props) {
+  const { textValue, setFilterText } = props;
+
+  const onChangeTextHandler = (e) => {
+    setFilterText(e.target.value);
+  };
+
+  const handleClearFilterText = () => {
+    setFilterText('');
+  };
+  console.log(textValue);
+
   return (
     <div className={styles.searchTask}>
       <Paper
@@ -19,25 +31,27 @@ function Search() {
           sx={{ ml: 1, flex: 1 }}
           label="Search task"
           placeholder="Search Task"
+          value={textValue}
+          onChange={onChangeTextHandler}
           inputProps={{ 'aria-label': 'search task' }}
         />
-        <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+        {textValue ? (
+          <HighlightOffIcon onClick={handleClearFilterText} />
+        ) : (
           <SearchIcon />
-        </IconButton>
+        )}
       </Paper>
-      {/* <TextField
-        label="Search task"
-        size="small"
-        variant="standart"
-        // value={}
-        // onChange={onChangeTexthandler}
-      /> */}
     </div>
   );
 }
 
-const mapStateToProps = () => ({
+Search.propTypes = {
+  textValue: PropTypes.string,
+  setFilterText: PropTypes.func,
+};
 
-})
+const mapStateToProps = (state) => ({
+  textValue: selectors.getFilterText(state),
+});
 
-export default connect(mapStateToProps, {...actions})(Search);
+export default connect(mapStateToProps, { ...actions })(Search);

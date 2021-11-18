@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import IconButton from '@mui/material/IconButton';
@@ -76,7 +73,10 @@ function Category(props) {
 
 Category.propTypes = {
   categoryId: PropTypes.string,
-  categoryTitle: PropTypes.array,
+  categoryTitle: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.array])),
+  editCategory: PropTypes.func,
+  loadTasks: PropTypes.func,
+  deleteCategory: PropTypes.func,
 };
 
 export default connect(null, {

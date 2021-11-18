@@ -2,6 +2,7 @@ import {
   SET_TASKS,
   SET_IS_LOADING_TASKS,
   SET_NEW_TASK,
+  SET_FILTER_INPUT,
 } from './actionTypes';
 
 const initState = {
@@ -13,7 +14,10 @@ const initState = {
     taskTitle: '',
     taskDescription: '',
     isDone: false,
-  }
+  },
+  filter: {
+    text: ""
+  },
 };
 
 export const tasksPanelReducer = (state = initState, action) => {
@@ -56,7 +60,15 @@ export const tasksPanelReducer = (state = initState, action) => {
         },
       };
     }
-
+    case SET_FILTER_INPUT: {
+      const value = action.payload;
+      const newFilter = state.filter;
+      newFilter.text = value;
+      return {
+        ...state,
+        filter: { ...newFilter },
+      };
+    }
     default:
       return state;
   }

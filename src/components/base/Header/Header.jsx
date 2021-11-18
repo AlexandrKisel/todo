@@ -115,6 +115,7 @@ function Header(props) {
           <Checkbox
             // checked={checked}
             // onChange={handleChange}
+            color="default"
             inputProps={{ 'aria-label': 'controlled' }}
           />
           <p>Show done</p>

@@ -1,9 +1,6 @@
 /* eslint-disable prefer-const */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 /* eslint-disable react/forbid-prop-types */
-/* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Checkbox from '@mui/material/Checkbox';
@@ -15,12 +12,12 @@ function Task(props) {
     taskId,
     taskCategory,
     taskTitle,
-    taskDescription,
+    // taskDescription,
     isDone,
     changeTaskStatus,
-    loadTasks,
-    setNewTask,
-    newTask,
+    // loadTasks,
+    // setNewTask,
+    // newTask,
   } = props;
 
 
@@ -45,8 +42,10 @@ Task.propTypes = {
   taskId: PropTypes.string,
   // taskCategory: PropTypes.object,
   taskTitle: PropTypes.string,
-  taskDescription: PropTypes.string,
+  // taskDescription: PropTypes.string,
   isDone: PropTypes.bool,
+  taskCategory: PropTypes.object,
+  changeTaskStatus: PropTypes.func,
 };
 
 export default connect(null , tasksPanelActions)(Task);

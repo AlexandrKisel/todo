@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/prop-types */
 import React from 'react';
@@ -9,14 +8,29 @@ import selectorsTasksPanel from '../selectors';
 import Task from '../Task';
 
 function TaskColumn(props) {
-  const { tasks, currentCategoryId, newTask } = props;
+  const { tasks, currentCategoryId, newTask, filterText } = props;
+
+  const filteringTasks = () => {
+    let filteredTasks = JSON.parse(tasks);
+    if (filterText) {
+        filteredTasks = filteredTasks.filter(
+          (item) =>
+            item.taskTitle.includes(filterText) ||
+            item.taskDescription.includes(filterText),
+        );}
+        return filteredTasks;
+    }
+    
+    const renderItems = filteringTasks();
+  
+
   return (
     <div className={styles.task}>
       <h3 className={styles.tasksColumnTitle}>TASKS</h3>
       <section className={styles.tasks}>
         <ul>
           {currentCategoryId
-            ? JSON.parse(tasks)
+            ? renderItems
                 .filter(
                   (item) => item.taskCategory.categoryId === currentCategoryId,
                 )
@@ -33,7 +47,7 @@ function TaskColumn(props) {
                     </li>
                   );
                 })
-            : JSON.parse(tasks).map((item) => {
+            : renderItems.map((item) => {
                 return (
                   <li key={item.taskId} className={styles.taskList}>
                     <Task
@@ -56,7 +70,7 @@ const mapStateToProps = (state) => ({
   tasks: selectorsTasksPanel.getTasks(state),
   newTask: selectorsTasksPanel.getNewTask(state),
   currentCategoryId: selectorsCategoriesPanel.getCurrentCategoryId(state),
+  filterText: selectorsTasksPanel.getFilterText(state),
 });
 
-export default connect(mapStateToProps, )(TaskColumn);
-
+export default connect(mapStateToProps)(TaskColumn);

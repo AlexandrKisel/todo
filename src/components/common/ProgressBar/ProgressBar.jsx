@@ -1,5 +1,4 @@
 /* eslint-disable react/forbid-prop-types */
-/* eslint-disable no-console */
 import React from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
 import PropTypes from 'prop-types';
