@@ -2,7 +2,8 @@ import {
   SET_TASKS,
   SET_IS_LOADING_TASKS,
   SET_NEW_TASK,
-  SET_FILTER_INPUT,
+  SET_FILTER_TEXT,
+  SET_FILTER_DONE,
 } from './actionTypes';
 
 const initState = {
@@ -16,7 +17,8 @@ const initState = {
     isDone: false,
   },
   filter: {
-    text: ""
+    text: "",
+    isFilteringDoneTasks: false,
   },
 };
 
@@ -60,14 +62,25 @@ export const tasksPanelReducer = (state = initState, action) => {
         },
       };
     }
-    case SET_FILTER_INPUT: {
+    case SET_FILTER_TEXT: {
       const value = action.payload;
-      const newFilter = state.filter;
-      newFilter.text = value;
       return {
         ...state,
-        filter: { ...newFilter },
+        filter: {
+          ...state.filter,
+          text: value
+        },
       };
+    }
+    case SET_FILTER_DONE: {
+      const value = action.payload;
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          isFilteringDoneTasks: value,
+        }
+      }
     }
     default:
       return state;

@@ -8,7 +8,7 @@ import selectorsTasksPanel from '../selectors';
 import Task from '../Task';
 
 function TaskColumn(props) {
-  const { tasks, currentCategoryId, newTask, filterText } = props;
+  const { tasks, currentCategoryId, newTask, filterText, filterDone } = props;
 
   const filteringTasks = () => {
     let filteredTasks = JSON.parse(tasks);
@@ -18,6 +18,9 @@ function TaskColumn(props) {
             item.taskTitle.includes(filterText) ||
             item.taskDescription.includes(filterText),
         );}
+    if (filterDone) {
+        filteredTasks = filteredTasks.filter((item) => item.isDone === true);
+    }
         return filteredTasks;
     }
     
@@ -71,6 +74,7 @@ const mapStateToProps = (state) => ({
   newTask: selectorsTasksPanel.getNewTask(state),
   currentCategoryId: selectorsCategoriesPanel.getCurrentCategoryId(state),
   filterText: selectorsTasksPanel.getFilterText(state),
+  filterDone: selectorsTasksPanel.getFilterDoneTasks(state),
 });
 
 export default connect(mapStateToProps)(TaskColumn);

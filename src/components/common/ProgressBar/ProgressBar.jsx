@@ -6,11 +6,9 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import styles from './styles.scss';
 
+
 function ProgressBar(props) {
     const { tasks } = props;
-    console.log(Number(tasks.length));
-    console.log(tasks.filter((item) => item.isDone === true).length);
-
     const value = tasks.filter((item) => item.isDone === true).length / Number(tasks.length) * 100;
   return (
       

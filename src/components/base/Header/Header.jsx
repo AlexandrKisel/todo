@@ -1,7 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable react/no-unused-prop-types */
-/* eslint-disable no-console */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -10,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import Checkbox from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
+import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import Logo from '../../common/Logo';
 import selectorsCategoriesPanel from '../../CategoriesPanel/selectors';
@@ -30,6 +27,8 @@ function Header(props) {
     setNewTask,
     newTask,
     addTask,
+    isFilteringDoneTasks,
+    setFilterDone,
   } = props;
 
   const handleNewCategoryChange = (e) => {
@@ -74,6 +73,10 @@ function Header(props) {
     setNewTask('', '', '', '', false);
   };
 
+  const onChangeDoneHandler = () => {
+    setFilterDone(!isFilteringDoneTasks);
+  }
+  
   const renderCategoryInput = (value, onChange) => {
     return (
       <TextField
@@ -113,8 +116,8 @@ function Header(props) {
         </div>
         <div className={styles.filterPanel}>
           <Checkbox
-            // checked={checked}
-            // onChange={handleChange}
+            checked={isFilteringDoneTasks}
+            onChange={onChangeDoneHandler}
             color="default"
             inputProps={{ 'aria-label': 'controlled' }}
           />
@@ -174,6 +177,20 @@ function Header(props) {
   );
 }
 
+Header.propTypes = {
+  categories: PropTypes.string,
+  setNewCategory: PropTypes.func,
+  newCategory: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.string])),
+  addCategory: PropTypes.func,
+  currentCategoryId: PropTypes.string,
+  tasks: PropTypes.string,
+  setNewTask: PropTypes.func,
+  newTask: PropTypes.shape({taskId: PropTypes.string, taskCategory: PropTypes.string, taskTitle: PropTypes.string, taskDescription: PropTypes.string, isDone: PropTypes.bool}),
+  addTask: PropTypes.func,
+  setFilterDone: PropTypes.func,
+  isFilteringDoneTasks: PropTypes.bool,
+}
+
 const mapStateToProps = (state) => ({
   categories: selectorsCategoriesPanel.getCategories(state),
   newCategory: selectorsCategoriesPanel.getNewCategory(state),
@@ -182,6 +199,7 @@ const mapStateToProps = (state) => ({
   tasks: selectorsTasksPanel.getTasks(state),
   newTask: selectorsTasksPanel.getNewTask(state),
   isLoadingTasks: selectorsTasksPanel.getIsLoadingTasks(state),
+  isFilteringDoneTasks: selectorsTasksPanel.getFilterDoneTasks(state),
 });
 
 export default connect(mapStateToProps, {

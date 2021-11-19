@@ -3,7 +3,8 @@ import {
     SET_TASKS,
     SET_IS_LOADING_TASKS,
     SET_NEW_TASK,
-    SET_FILTER_INPUT,
+    SET_FILTER_TEXT,
+    SET_FILTER_DONE,
 } from './actionTypes';
 
 const setTasks = (tasks) => ({
@@ -31,8 +32,13 @@ const setNewTask = (newTaskId, newTaskCategory, newTaskTitle, newTaskDescription
     },
 });
 
-const setFilterInput = (value) => ({
-    type: SET_FILTER_INPUT,
+const setFilterText = (value) => ({
+    type: SET_FILTER_TEXT,
+    payload: value,
+})
+
+const setFilterDone = (value) => ({
+    type: SET_FILTER_DONE,
     payload: value,
 })
 
@@ -52,14 +58,9 @@ const addTask = (newTask) => (dispatch) => {
 };
 
 const changeTaskStatus = (currentTask) => (dispatch) => {
-    console.log(currentTask);
     dataService.editTaskStatus(currentTask).then(() => {
         dispatch(loadTasks());
     });
-}
-
-const setFilterText = (value) => (dispatch) => {
-    dispatch(setFilterInput(value));
 }
 
 export default {
@@ -68,4 +69,5 @@ export default {
     addTask,
     changeTaskStatus,
     setFilterText,
+    setFilterDone,
 }
