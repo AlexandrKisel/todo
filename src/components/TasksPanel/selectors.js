@@ -3,6 +3,7 @@ const getIsLoadingTasks = (store) => store.tasksPanelReducer.isLoadingTasks;
 const getNewTask = (store) => store.tasksPanelReducer.newTask;
 const getFilterText = (store) => store.tasksPanelReducer.filter.text;
 const getFilterDoneTasks = (store) => store.tasksPanelReducer.filter.isFilteringDoneTasks;
+const getTaskEdit = (store) => store.tasksPanelReducer.isTaskEdit;
 
 export default {
     getTasks,
@@ -10,4 +11,5 @@ export default {
     getNewTask,
     getFilterText,
     getFilterDoneTasks,
+    getTaskEdit,
 }

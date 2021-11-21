@@ -1,0 +1,22 @@
+@use "variables"as vars;
+@use "mixins" as mixins;
+
+.taskEditPanel {
+    @include mixins.flexbox;
+    @include mixins.flex-direction(column);
+    padding-bottom: vars.$measure;
+}
+
+.taskEditInputs {
+    padding-top: vars.$measure;
+    @include mixins.flexbox;
+    @include mixins.flex-direction(column);
+    @include mixins.align-items(flex-start);
+}
+
+.taskCheckbox {
+    margin: vars.$measure 0;
+    @include mixins.flexbox;
+    @include mixins.flex-direction;
+    @include mixins.align-items;
+}

@@ -1,20 +1,39 @@
-@use "variables" as vars;
-@use 'mixins' as mixins;
+@use "variables"as vars;
+@use 'mixins'as mixins;
 
 .task {
     @include mixins.flexbox;
     @include mixins.flex-direction;
     @include mixins.justify-content($value: space-between);
     @include mixins.align-items;
+
+    .taskButtonsWrapper {
+        @include mixins.flexbox;
+        @include mixins.align-items;
+
+        .taskCategory {
+            padding-right: vars.$measure*2;
+            color: rgba(255, 255, 255, 0.438);
+            font-weight: 300;
+        }
+    }
 }
 
 .taskTitle {
     @include mixins.flexbox;
     @include mixins.flex-direction;
     @include mixins.align-items;
+
+    .taskDescription {
+        margin-left: vars.$measure*3;
+        overflow: hidden;
+        width: 100px;
+        height: 20px;
+    }
 }
+
+
 
 .taskTitle h3 {
     padding-left: vars.$measure;
 }
-

@@ -7,34 +7,34 @@ const port = 8081;
 
 const categories = [{
     categoryId: '1',
-    categoryTitle: ['To Read'],
+    categoryTitle: 'To Read',
   },
   {
     categoryId: '2',
-    categoryTitle: ['To Watch'],
+    categoryTitle: 'To Watch',
   },
   {
     categoryId: '3',
-    categoryTitle: ['To Buy'],
+    categoryTitle: 'To Buy',
   },
   {
     categoryId: '4',
-    categoryTitle: ['To Eat'],
+    categoryTitle: 'To Eat',
   },
   {
     categoryId: '5',
-    categoryTitle: ['To Go'],
+    categoryTitle: 'To Go',
   },
   {
     categoryId: '6',
-    categoryTitle: ['To Learn'],
+    categoryTitle: 'To Learn',
   },
 ];
 
 const tasks = [{
   taskId: '1',
   taskCategory: categories[0],
-  taskTitle: 'Bram Stoker: Dracula',
+  taskTitle: 'Jodi Picoult: Leaving Time',
   taskDescription: 'pep',
   isDone: false,
 }, {
@@ -178,7 +178,7 @@ const tasks = [{
 }, {
   taskId: '25',
   taskCategory: categories[5],
-  taskTitle: 'JavaScript',
+  taskTitle: 'HTML',
   taskDescription: 'pep',
   isDone: false,
 }, {
@@ -190,8 +190,14 @@ const tasks = [{
 }, {
   taskId: '27',
   taskCategory: categories[5],
-  taskTitle: 'REACT',
+  taskTitle: 'Javascript',
   taskDescription: 'pip',
+  isDone: false,
+}, {
+  taskId: '28',
+  taskCategory: categories[5],
+  taskTitle: 'REACT',
+  taskDescription: 'pop',
   isDone: false,
 }]
 
@@ -258,6 +264,27 @@ app.post('/deleteCategory', (req, res) => {
   };
   setTimeout(() => {
     res.json(categories)
+  }, 200)
+})
+
+app.post('/editTask', (req, res) => {
+  tasks.splice(
+    tasks.findIndex((item) => item.taskId === req.body.taskId),
+    1,
+    req.body,
+  );
+  setTimeout(() => {
+    res.json(tasks)
+  }, 200)
+})
+
+app.post('/deleteTask', (req, res) => {
+  tasks.splice(
+    tasks.findIndex((item) => item.taskId === req.body.taskId),
+    1
+  );
+  setTimeout(() => {
+    res.json(tasks)
   }, 200)
 })
 

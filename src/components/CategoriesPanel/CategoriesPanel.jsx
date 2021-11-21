@@ -1,8 +1,6 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable no-console */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import selectors from './selectors';
 import styles from './styles.scss';
 import actions from './actions';
@@ -44,6 +42,14 @@ function CategoriesPanel(props) {
       </div>
     </>
   );
+}
+
+CategoriesPanel.propTypes = {
+  categories: PropTypes.string,
+  currentCategoryId: PropTypes.string,
+  isLoadingCategories: PropTypes.bool,
+  loadCategories: PropTypes.func,
+  setCurrentCategoryId: PropTypes.func,
 }
 
 const mapStateToProps = (state) => ({

@@ -1,25 +1,40 @@
-/* eslint-disable prefer-const */
-/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Checkbox from '@mui/material/Checkbox';
 import styles from './styles.scss';
 import tasksPanelActions from '../actions';
+import EditButton from '../../common/EditButton';
+import DeleteButton from '../../common/DeleteButton';
 
 function Task(props) {
   const {
     taskId,
     taskCategory,
     taskTitle,
-    // taskDescription,
+    taskDescription,
     isDone,
     changeTaskStatus,
-    // loadTasks,
-    // setNewTask,
-    // newTask,
+    loadTasks,
+    setTaskEditPanel,
+    deleteTask,
   } = props;
+  // console.log(taskDescription);
 
+  const handleOpenTaskEditPanel = () => {
+    setTaskEditPanel(true, {
+      taskId,
+      taskCategory,
+      taskTitle,
+      taskDescription,
+      isDone,
+    });
+  };
+
+  const handleDeleteTaskClick = () => {
+    deleteTask({ taskId });
+    loadTasks();
+  };
 
   return (
     <div className={styles.task}>
@@ -32,8 +47,14 @@ function Task(props) {
         />
         {/* <div>{taskId}</div> */}
         <h3>{taskTitle}</h3>
+        <div className={styles.taskDescription}>{taskDescription}</div>
       </div>
-      <div>{taskCategory.categoryTitle}</div>
+
+      <div className={styles.taskButtonsWrapper}>
+        <div className={styles.taskCategory}>{taskCategory.categoryTitle}</div>
+        <EditButton handleActivateEditModeClick={handleOpenTaskEditPanel} />
+        <DeleteButton handleDeleteClick={handleDeleteTaskClick} />
+      </div>
     </div>
   );
 }
@@ -42,10 +63,26 @@ Task.propTypes = {
   taskId: PropTypes.string,
   // taskCategory: PropTypes.object,
   taskTitle: PropTypes.string,
-  // taskDescription: PropTypes.string,
+  taskDescription: PropTypes.string,
   isDone: PropTypes.bool,
-  taskCategory: PropTypes.object,
+  taskCategory: PropTypes.shape({
+    categoryId: PropTypes.string,
+    categoryTitle: PropTypes.string,
+  }),
   changeTaskStatus: PropTypes.func,
+  deleteTask: PropTypes.func,
+  loadTasks: PropTypes.func,
+  setTaskEditPanel: PropTypes.func,
+  newTask: PropTypes.shape({
+    taskId: PropTypes.string,
+    taskCategory: PropTypes.shape({
+      categoryId: PropTypes.string,
+      categoryTitle: PropTypes.string,
+    }),
+    taskTitle: PropTypes.string,
+    taskDescription: PropTypes.string,
+    isDone: PropTypes.bool,
+  }),
 };
 
-export default connect(null , tasksPanelActions)(Task);
+export default connect(null, tasksPanelActions)(Task);

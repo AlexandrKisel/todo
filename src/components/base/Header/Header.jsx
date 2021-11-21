@@ -49,7 +49,7 @@ function Header(props) {
   const handleNewTaskChange = (e) => {
     setNewTask(
       (
-        Number(JSON.parse(tasks)[JSON.parse(tasks).length - 1].taskId) + 1
+        Number(JSON.parse(tasks)[JSON.parse(tasks).length - 1]?.taskId) + 1 || 1
       ).toString(),
       JSON.parse(categories)[
         JSON.parse(categories).findIndex(
@@ -70,13 +70,13 @@ function Header(props) {
       taskDescription: newTask.taskDescription,
       isDone: newTask.isDone,
     });
-    setNewTask('', '', '', '', false);
+    setNewTask('', {}, '', '', false);
   };
 
   const onChangeDoneHandler = () => {
     setFilterDone(!isFilteringDoneTasks);
-  }
-  
+  };
+
   const renderCategoryInput = (value, onChange) => {
     return (
       <TextField
@@ -126,7 +126,7 @@ function Header(props) {
         </div>
       </div>
       <div>
-        <ProgressBar tasks={JSON.parse(tasks)}/>
+        <ProgressBar tasks={JSON.parse(tasks)} />
       </div>
       <div className={styles.addPanel}>
         <div>
@@ -165,7 +165,7 @@ function Header(props) {
               <Button
                 variant="contained"
                 onClick={handleAddTaskClick}
-                disabled={!newTask.taskTitle}
+                disabled={!newTask.taskTitle || !currentCategoryId}
               >
                 Add
               </Button>
@@ -180,16 +180,28 @@ function Header(props) {
 Header.propTypes = {
   categories: PropTypes.string,
   setNewCategory: PropTypes.func,
-  newCategory: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.string])),
+  newCategory: PropTypes.shape({
+    categoryId: PropTypes.string,
+    categoryTitle: PropTypes.string,
+  }),
   addCategory: PropTypes.func,
   currentCategoryId: PropTypes.string,
   tasks: PropTypes.string,
   setNewTask: PropTypes.func,
-  newTask: PropTypes.shape({taskId: PropTypes.string, taskCategory: PropTypes.string, taskTitle: PropTypes.string, taskDescription: PropTypes.string, isDone: PropTypes.bool}),
+  newTask: PropTypes.shape({
+    taskId: PropTypes.string,
+    taskCategory: PropTypes.shape({
+      categoryId: PropTypes.string,
+      categoryTitle: PropTypes.string,
+    }),
+    taskTitle: PropTypes.string,
+    taskDescription: PropTypes.string,
+    isDone: PropTypes.bool,
+  }),
   addTask: PropTypes.func,
   setFilterDone: PropTypes.func,
   isFilteringDoneTasks: PropTypes.bool,
-}
+};
 
 const mapStateToProps = (state) => ({
   categories: selectorsCategoriesPanel.getCategories(state),

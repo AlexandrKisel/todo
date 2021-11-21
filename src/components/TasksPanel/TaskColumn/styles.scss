@@ -19,7 +19,6 @@
         padding: vars.$measure;
         box-shadow: inset vars.$shadow;
         display: block;
-        cursor: pointer;
 
         &::after {
             content: '';

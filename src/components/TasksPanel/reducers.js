@@ -2,16 +2,23 @@ import {
   SET_TASKS,
   SET_IS_LOADING_TASKS,
   SET_NEW_TASK,
+  SET_NEW_TASK_ID,
+  SET_NEW_TASK_CATEGORY,
+  SET_NEW_TASK_TITLE,
+  SET_NEW_TASK_DESCRIPTION,
+  SET_NEW_TASK_STATUS,
   SET_FILTER_TEXT,
   SET_FILTER_DONE,
+  SET_TASK_EDIT_PANEL,
 } from './actionTypes';
 
 const initState = {
   tasks: [],
   isLoadingTasks: false,
+  isTaskEdit: false,
   newTask: {
     taskId: '',
-    taskCategory: '',
+    taskCategory: {},
     taskTitle: '',
     taskDescription: '',
     isDone: false,
@@ -62,6 +69,56 @@ export const tasksPanelReducer = (state = initState, action) => {
         },
       };
     }
+    case SET_NEW_TASK_ID: {
+      const newTaskId = action.payload;
+      return {
+        ...state,
+        newTask: {
+          ...state.newTask,
+          taskId: newTaskId,
+        },
+      };
+    }
+    case SET_NEW_TASK_CATEGORY: {
+      const newTaskCategory = action.payload;
+      return {
+        ...state,
+        newTask: {
+          ...state.newTask,
+          taskCategory: newTaskCategory,
+        },
+      };
+    }
+    case SET_NEW_TASK_TITLE: {
+      const newTaskTitle = action.payload;
+      return {
+        ...state,
+        newTask: {
+          ...state.newTask,
+          taskTitle: newTaskTitle,
+        },
+      };
+    }
+    case SET_NEW_TASK_DESCRIPTION: {
+      const newTaskDescription = action.payload;
+      return {
+        ...state,
+        newTask: {
+          ...state.newTask,
+          taskDescription: newTaskDescription,
+        },
+      };
+    }
+    case SET_NEW_TASK_STATUS: {
+      const isDoneNewTask = action.payload;
+      return {
+        ...state,
+        newTask: {
+          ...state.newTask,
+          isDone: isDoneNewTask,
+        },
+      };
+    }
     case SET_FILTER_TEXT: {
       const value = action.payload;
       return {
@@ -79,6 +136,19 @@ export const tasksPanelReducer = (state = initState, action) => {
         filter: {
           ...state.filter,
           isFilteringDoneTasks: value,
+        }
+      }
+    }
+    case SET_TASK_EDIT_PANEL: {
+      const {
+        isEdit,
+        task
+      } = action.payload;
+      return {
+        ...state,
+        isTaskEdit: isEdit,
+        newTask: {
+          ...task
         }
       }
     }

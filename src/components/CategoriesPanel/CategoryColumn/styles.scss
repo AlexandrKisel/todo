@@ -4,6 +4,13 @@
 .categoriesColumnTitle {
     padding-bottom: vars.$measure;
     cursor: pointer;
+    
+}
+
+.categoriesColumnTitleActive {
+    color: #424242;
+    padding-bottom: vars.$measure;
+    cursor: pointer;
 }
 
 .categories {

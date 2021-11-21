@@ -75,8 +75,27 @@ const editTaskStatus = async (data = {}) => {
     return response.json();
 }
 
-const deleteTask = async () => {};
+const editTask = async (data = {}) => {
+    const response = await fetch('http://localhost:8081/editTask', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+    return response.json();
+}
 
+const deleteTask = async (data = {}) => {
+    const response = await fetch('http://localhost:8081/deleteTask', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
+    return response.json();
+}
 
 export default {
     getCategories,
@@ -85,6 +104,7 @@ export default {
     createTask,
     editCategory,
     deleteCategory,
+    editTask,
     deleteTask,
     editTaskStatus,
-  };
+  }

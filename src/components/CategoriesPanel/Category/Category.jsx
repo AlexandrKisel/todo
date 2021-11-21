@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import IconButton from '@mui/material/IconButton';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { connect } from 'react-redux';
 import styles from './styles.scss';
 import categoriesPanelActions from '../actions';
 import tasksPanelActions from '../../TasksPanel/actions';
+import EditButton from '../../common/EditButton';
+import DeleteButton from '../../common/DeleteButton';
 
 function Category(props) {
   const { categoryId, categoryTitle, editCategory, loadTasks, deleteCategory } =
@@ -42,7 +41,7 @@ function Category(props) {
   };
 
   const handleDeleteCategoryClick = () => {
-    deleteCategory({ categoryId, categoryTitle });
+    deleteCategory({ categoryId });
     loadTasks();
   };
 
@@ -59,13 +58,9 @@ function Category(props) {
           onKeyDown={onEnterDeactivateEditMode}
         />
       )}
-      <div>
-        <IconButton aria-label="edit" onClick={activateEditMode}>
-          <ModeEditIcon />
-        </IconButton>
-        <IconButton aria-label="delete" onClick={handleDeleteCategoryClick}>
-          <DeleteIcon />
-        </IconButton>
+      <div className={styles.buttonsWrapper}>
+        <EditButton handleActivateEditModeClick={activateEditMode}/>
+        <DeleteButton handleDeleteClick={handleDeleteCategoryClick}/>
       </div>
     </div>
   );
@@ -73,7 +68,7 @@ function Category(props) {
 
 Category.propTypes = {
   categoryId: PropTypes.string,
-  categoryTitle: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.array])),
+  categoryTitle: PropTypes.string,
   editCategory: PropTypes.func,
   loadTasks: PropTypes.func,
   deleteCategory: PropTypes.func,

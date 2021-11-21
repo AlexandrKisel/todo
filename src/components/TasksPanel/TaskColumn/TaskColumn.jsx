@@ -45,6 +45,7 @@ function TaskColumn(props) {
                         taskId={item.taskId}
                         taskTitle={item.taskTitle}
                         taskCategory={item.taskCategory}
+                        taskDescription={item.taskDescription}
                         isDone={item.isDone}
                       />
                     </li>
@@ -58,6 +59,7 @@ function TaskColumn(props) {
                       taskId={item.taskId}
                       taskTitle={item.taskTitle}
                       taskCategory={item.taskCategory}
+                      taskDescription={item.taskDescription}
                       isDone={item.isDone}
                     />
                   </li>

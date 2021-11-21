@@ -1,12 +1,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable no-undef */
-/* eslint-disable no-console */
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import styles from './styles.scss';
 import Category from '../Category';
 
@@ -15,14 +11,13 @@ function CategoryColumn(props) {
 
   const handleCurrentCategoryIdChange = (curCategoryId) => {
     setCurrentCategoryId(curCategoryId);
-    console.log(currentCategoryId);
   };
 
-  // console.log(props);
+  console.log(currentCategoryId);
   return (
     <div>
       <h3
-        className={styles.categoriesColumnTitle}
+        className={currentCategoryId ? styles.categoriesColumnTitle : styles.categoriesColumnTitleActive}
         onClick={() => {
           handleCurrentCategoryIdChange(null);
         }}
@@ -66,8 +61,11 @@ function CategoryColumn(props) {
 }
 
 CategoryColumn.propTypes = {
-  categories: PropTypes.array,
+  categories: PropTypes.arrayOf(
+    PropTypes.objectOf(PropTypes.string, PropTypes.string),
+  ),
   currentCategoryId: PropTypes.string,
+  setCurrentCategoryId: PropTypes.func,
 };
 
 export default CategoryColumn;
