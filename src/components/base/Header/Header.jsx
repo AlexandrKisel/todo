@@ -1,11 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
 import Checkbox from '@mui/material/Checkbox';
-import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import Logo from '../../common/Logo';
@@ -15,6 +11,7 @@ import actionsCategoriesPanel from '../../CategoriesPanel/actions';
 import actionsTasksPanel from '../../TasksPanel/actions';
 import Search from '../../common/Search';
 import ProgressBar from '../../common/ProgressBar';
+import AddForm from '../../common/AddForm';
 
 function Header(props) {
   const {
@@ -77,34 +74,6 @@ function Header(props) {
     setFilterDone(!isFilteringDoneTasks);
   };
 
-  const renderCategoryInput = (value, onChange) => {
-    return (
-      <TextField
-        value={value}
-        id="new-category-title"
-        type="text"
-        onChange={onChange}
-        size="small"
-        variant="outlined"
-        label="Enter category title"
-      />
-    );
-  };
-
-  const renderTaskInput = (value, onChange) => {
-    return (
-      <TextField
-        value={value}
-        id="new-task-title"
-        type="text"
-        onChange={onChange}
-        size="small"
-        variant="outlined"
-        label="Enter task title"
-      />
-    );
-  };
-
   return (
     <div className={styles.header}>
       <div className={styles.logoWrapper}>
@@ -130,47 +99,25 @@ function Header(props) {
       </div>
       <div className={styles.addPanel}>
         <div>
-          <Box component="form" noValidate>
-            <FormControl
-              variant="standard"
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              {renderCategoryInput(
-                newCategory.categoryTitle,
-                handleNewCategoryChange,
-              )}
-              <Button
-                variant="contained"
-                onClick={handleAddCategoryClick}
-                disabled={!newCategory.categoryTitle}
-              >
-                Add
-              </Button>
-            </FormControl>
-          </Box>
+          <AddForm
+            value={newCategory.categoryTitle}
+            onChange={handleNewCategoryChange}
+            handleAddClick={handleAddCategoryClick}
+            labelTitle="Enter category title"
+            idValue="new-category-title"
+            disablingValue
+          />
         </div>
         <div>
-          <Box component="form" noValidate>
-            <FormControl
-              variant="standard"
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              {renderTaskInput(newTask.taskTitle, handleNewTaskChange)}
-              <Button
-                variant="contained"
-                onClick={handleAddTaskClick}
-                disabled={!newTask.taskTitle || !currentCategoryId}
-              >
-                Add
-              </Button>
-            </FormControl>
-          </Box>
+          {currentCategoryId && (
+            <AddForm
+              value={newTask.taskTitle}
+              onChange={handleNewTaskChange}
+              handleAddClick={handleAddTaskClick}
+              labelTitle="Enter task title"
+              idValue="new-task-title"
+            />
+          )}
         </div>
       </div>
     </div>
