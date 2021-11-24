@@ -19,7 +19,6 @@ function Search(props) {
   const handleClearFilterText = () => {
     setFilterText('');
   };
-  console.log(filterText);
 
   return (
     <div className={styles.searchTask}>

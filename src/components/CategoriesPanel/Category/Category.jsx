@@ -16,16 +16,14 @@ function Category(props) {
   const [editCategoryId] = useState(categoryId);
 
   const activateEditMode = () => {
-    console.log(editMode);
     setEditMode(!editMode);
-    console.log(editMode);
   };
 
   const deactivateEditMode = () => {
     setEditMode(!editMode);
     editCategory({
       categoryId: editCategoryId,
-      categoryTitle: [editCategoryName],
+      categoryTitle: editCategoryName,
     });
     loadTasks();
   };

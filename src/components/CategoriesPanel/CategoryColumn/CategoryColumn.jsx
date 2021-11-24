@@ -13,7 +13,6 @@ function CategoryColumn(props) {
     setCurrentCategoryId(curCategoryId);
   };
 
-  console.log(currentCategoryId);
   return (
     <div>
       <h3
