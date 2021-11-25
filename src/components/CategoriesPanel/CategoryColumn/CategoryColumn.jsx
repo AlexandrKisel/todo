@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable no-undef */
@@ -25,9 +26,9 @@ function CategoryColumn(props) {
       </h3>
       <section className={styles.categories}>
         <ul>
-          {categories.map((item) => {
+          {categories.map((item, index) => {
             return (
-              <React.Fragment key={item.categoryId}>
+              <React.Fragment key={index}>
                 <div
                   className={
                     currentCategoryId === item.categoryId
