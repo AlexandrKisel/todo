@@ -1,4 +1,4 @@
 # todo
 Todo App using React
 
-Before launching the application run the server
+Before launching the application run the server (npm run server)
